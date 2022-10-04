@@ -54,3 +54,21 @@ module.exports.listUsers = (req, res, next) => {
     .then((users) => res.json(users))
     .catch(next)
 }
+
+module.exports.profile = (req, res, next) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      if (user) {
+        res.json(user)
+      } else {
+        next(createError(404, "User not found"))
+      }
+    })
+    .catch(next)
+}
+
+module.exports.profileUpdate = (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then((user) => res.json(user))
+    .catch(next)
+}
