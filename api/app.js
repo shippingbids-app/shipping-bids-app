@@ -5,6 +5,8 @@ const express = require("express")
 const logger = require("morgan")
 const mongoose = require("mongoose")
 
+require("./config/db.config")
+
 const app = express()
 
 app.use(express.json())

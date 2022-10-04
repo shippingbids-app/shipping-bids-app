@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
+// const roles = require("../data/roles")
+const vehicles = require("../data/vehicles")
+const services = require("../data/services")
 
 const EMAIL_PATTERN =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -52,32 +55,32 @@ const userSchema = new Schema(
       unique: true,
       match: [PHN_PATTERN, "Invalid phone number"],
     },
-    roles: {
-      type: [
-        {
-          type: String,
-          required: "Role is required",
-          enum: roles.map((role) => role.value),
-        },
-      ],
-      default: [], //ESTO ES NECESARIO????
-    },
+    // roles: {
+    //   type: [
+    //     {
+    //       type: String,
+    //       required: "Role is required",
+    //       enum: roles.map((role) => role.value),
+    //     },
+    //   ],
+    //   default: [], //ESTO ES NECESARIO????
+    // },
     vehicles: {
       type: [
         {
           type: String,
-          required: "Role is required",
+          required: "Vehicle is required",
           enum: vehicles.map((vehicle) => vehicle.value),
         },
       ],
       default: [],
     },
-    enterprises: {
+    services: {
       type: [
         {
           type: String,
-          required: "Role is required",
-          enum: enterprises.map((enterprise) => enterprise.value),
+          required: "Services is required",
+          enum: services.map((service) => service.value),
         },
       ],
       default: [],
