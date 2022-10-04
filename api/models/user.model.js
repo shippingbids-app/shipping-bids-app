@@ -88,6 +88,16 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform: (doc, ret) => {
+        delete ret.__v;
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.password;
+
+        return ret
+      }
+    }
   }
 );
 
@@ -106,7 +116,7 @@ userSchema.pre("save", function (next) {
 });
 
 userSchema.methods.checkPassword = function (passwordToCheck) {
-  return bcrypt.comnpare(passwordToCheck, this.password);
+  return bcrypt.compare(passwordToCheck, this.password);
 };
 
 const User = mongoose.model("User", userSchema);
