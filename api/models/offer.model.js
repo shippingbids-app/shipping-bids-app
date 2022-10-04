@@ -14,7 +14,7 @@ const offerSchema = new Schema(
       trim: true,
     },
     author: {
-      ref: User,
+      ref: "User",
       type: mongoose.Schema.Types.ObjectId,
       required: true
     },
