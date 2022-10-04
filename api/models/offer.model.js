@@ -13,6 +13,11 @@ const offerSchema = new Schema(
       required: "Dimmensions are required: length x width x height",
       trim: true,
     },
+    author: {
+      ref: User,
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
+    },
     origin: {
       type: String,
       required: "Origin place is required",
