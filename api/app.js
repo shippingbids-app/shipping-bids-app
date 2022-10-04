@@ -10,8 +10,8 @@ const app = express()
 app.use(express.json())
 app.use(logger("dev"))
 
-// const routes = require("./config/routes.config")
-// app.use("/api/v1", routes)
+const routes = require("./config/routes.config")
+app.use("/api/v1", routes)
 
 app.use((req, res, next) => next(createError(404, "Route not found")));
 
