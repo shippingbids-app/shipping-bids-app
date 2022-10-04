@@ -12,8 +12,8 @@ const schema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    stream: {
-      ref: "Stream",
+    offer: {
+      ref: "Offer",
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
