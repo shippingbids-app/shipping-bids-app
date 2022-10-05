@@ -10,7 +10,7 @@ const offerSchema = new Schema(
     },
     product: {
       type: Number,
-      required: "Dimmensions are required: length x width x height",
+      required: "Dimmensions are required",
       trim: true,
     },
     author: {

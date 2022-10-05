@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 // const roles = require("../data/roles")
-const vehicles = require("../data/vehicles")
-const services = require("../data/services")
+const vehicles = require("../data/vehicles");
+const services = require("../data/services");
+const capacities = require("../data/capacities");
 
 const EMAIL_PATTERN =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -79,8 +80,18 @@ const userSchema = new Schema(
       type: [
         {
           type: String,
-          required: "Services is required",
+          required: "Service type is required",
           enum: services.map((service) => service.value),
+        },
+      ],
+      default: [],
+    },
+    logistics_capacity: {
+      type: [
+        {
+          type: String,
+          required: "Logistics capacity is required",
+          enum: capacities.map((capacity) => capacity.value),
         },
       ],
       default: [],
@@ -95,9 +106,9 @@ const userSchema = new Schema(
         delete ret._id;
         delete ret.password;
 
-        return ret
-      }
-    }
+        return ret;
+      },
+    },
   }
 );
 
