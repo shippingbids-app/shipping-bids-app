@@ -8,7 +8,7 @@ module.exports.session = expressSession({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: mongoose.connection_connectionString,
+    mongoUrl: mongoose.connection._connectionString,
     ttl: 24 * 3600 * 1000,
   }),
   cookie: {

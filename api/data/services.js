@@ -4,7 +4,7 @@ const services = [
   { value: "store-parts", label: "Store Parts" },
   { value: "household-appliance", label: "Household Appliance"},
   { value: "shop", label: "Shop" },
-  { value: "dangerous-goods", label: "Dangerous Goods" },
+  { value: "fragile-merchandise", label: "Fragile Merchandise" },
   { value: "particular", label: "Particular" },
 ];
 

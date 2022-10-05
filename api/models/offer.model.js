@@ -9,7 +9,7 @@ const offerSchema = new Schema(
       trim: true,
     },
     product: {
-      type: Number,
+      type: String,
       required: "Dimmensions are required",
       trim: true,
     },
@@ -28,7 +28,7 @@ const offerSchema = new Schema(
       required: "Destination place is required",
       trim: true,
     },
-    date: {
+    expiration_date: {
       type: Date,
       required: "Date is required for bids",
     },
