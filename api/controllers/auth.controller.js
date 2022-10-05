@@ -38,7 +38,7 @@ module.exports.authenticate = (req, res, next) => {
       } else {
         return user.checkPassword(password).then((match) => {
           if (match) {
-            // req.session.userId = user.id
+            req.session.userId = user.id
             res.status(201).json(user)
           } else {
             invalidAuhtError()

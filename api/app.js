@@ -1,19 +1,23 @@
-require("dotenv").config()
+require("dotenv").config();
 
-const createError = require("http-errors")
-const express = require("express")
-const logger = require("morgan")
-const mongoose = require("mongoose")
+const createError = require("http-errors");
+const express = require("express");
+const logger = require("morgan");
+const mongoose = require("mongoose");
 
-require("./config/db.config")
+require("./config/db.config");
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use(logger("dev"))
+app.use(express.json());
+app.use(logger("dev"));
 
-const routes = require("./config/routes.config")
-app.use("/api/v1", routes)
+const { session, loadUser } = require("./config/session.config");
+app.use(session);
+app.use(loadUser);
+
+const routes = require("./config/routes.config");
+app.use("/api/v1", routes);
 
 app.use((req, res, next) => next(createError(404, "Route not found")));
 
@@ -35,10 +39,10 @@ app.use((error, req, res, next) => {
   res.send(data);
 });
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3001;
 
-app.listen(port, () => 
+app.listen(port, () =>
   console.log(`Shipping-Bids API running at port ${port}`)
-)
+);
 
-module.exports = app
+module.exports = app;
