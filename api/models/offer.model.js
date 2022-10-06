@@ -16,17 +16,26 @@ const offerSchema = new Schema(
     author: {
       ref: "User",
       type: mongoose.Schema.Types.ObjectId,
-      required: true
+      required: true,
     },
     origin: {
       type: String,
       required: "Origin place is required",
-      trim: true,
     },
     destination: {
       type: String,
       required: "Destination place is required",
-      trim: true,
+    },
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
     },
     expiration_date: {
       type: Date,
@@ -41,6 +50,7 @@ const offerSchema = new Schema(
   { timestamps: true }
 );
 
+offerSchema.index({ location: "2dsphere" });
 
-const Offer = mongoose.model("Offer", offerSchema)
-module.exports = Offer
+const Offer = mongoose.model("Offer", offerSchema);
+module.exports = Offer;

@@ -16,6 +16,12 @@ const { session, loadUser } = require("./config/session.config");
 app.use(session);
 app.use(loadUser);
 
+app.use((req, res, next) => {
+  res.locals.googleApiKey = process.env.GOOGLE_API_KEY,
+  res.locals.query = req.query
+  next()
+})
+
 const routes = require("./config/routes.config");
 app.use("/api/v1", routes);
 
