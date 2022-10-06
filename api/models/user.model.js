@@ -98,6 +98,7 @@ const userSchema = new Schema(
   {
     timestamps: true,
     toJSON: {
+      virtuals: true,
       transform: (doc, ret) => {
         delete ret.__v;
         ret.id = ret._id;
@@ -109,6 +110,12 @@ const userSchema = new Schema(
     },
   }
 );
+
+userSchema.virtual("offers", {
+  ref: "Offer",
+  localField: "_id",
+  foreignField: "user"
+})
 
 userSchema.pre("save", function (next) {
   if (this.isModified("password")) {

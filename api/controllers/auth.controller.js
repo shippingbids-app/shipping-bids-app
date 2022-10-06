@@ -1,74 +1,76 @@
-const createError = require("http-errors")
-const { User } = require("../models")
-const mongoose = require("mongoose")
+const createError = require("http-errors");
+const { User } = require("../models");
+const mongoose = require("mongoose");
 
 module.exports.register = (req, res, next) => {
-  const { email } = req.body 
+  const { email } = req.body;
   User.findOne({ email })
     .then((user) => {
       if (user) {
         next(
           createError(400, {
             message: "User validation failed",
-            error: { email: { message: "User already registered"} }
+            error: { email: { message: "User already registered" } },
           })
         );
       } else {
-        return User.create(req.body).then((user) => res.status(201).json(user))
+        return User.create(req.body).then((user) => res.status(201).json(user));
       }
     })
-    .catch(next)
-}
+    .catch(next);
+};
 
 module.exports.authenticate = (req, res, next) => {
   function invalidAuhtError() {
     next(
       createError(400, {
         message: "User validation failed",
-        errors: { email: { message : "Invalid email or password"} }
+        errors: { email: { message: "Invalid email or password" } },
       })
-    )
+    );
   }
 
-  const { email, password } = req.body
+  const { email, password } = req.body;
   User.findOne({ email })
     .then((user) => {
       if (!user) {
-        invalidAuhtError()
+        invalidAuhtError();
       } else {
         return user.checkPassword(password).then((match) => {
           if (match) {
-            req.session.userId = user.id
-            res.status(201).json(user)
+            req.session.userId = user.id;
+            res.status(201).json(user);
           } else {
-            invalidAuhtError()
+            invalidAuhtError();
           }
-        })
+        });
       }
     })
-    .catch(next)
-}
+    .catch(next);
+};
 
 module.exports.listUsers = (req, res, next) => {
   User.find()
+
     .then((users) => res.json(users))
-    .catch(next)
-}
+    .catch(next);
+};
 
 module.exports.profile = (req, res, next) => {
   User.findById(req.params.id)
+    .populate("offers, title")
     .then((user) => {
       if (user) {
-        res.json(user)
+        res.json(user);
       } else {
-        next(createError(404, "User not found"))
+        next(createError(404, "User not found"));
       }
     })
-    .catch(next)
-}
+    .catch(next);
+};
 
 module.exports.profileUpdate = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  User.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((user) => res.json(user))
-    .catch(next)
-}
+    .catch(next);
+};
