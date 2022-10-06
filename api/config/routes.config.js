@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { auth, offer, service } = require("../controllers/");
-const { secure, offersMid } = require("../middlewares");
+const { secure, offersMid, servicesMid } = require("../middlewares");
 
 router.post("/register", auth.register);
 router.post("/authenticate", auth.authenticate);
@@ -20,5 +20,13 @@ router.delete(
 );
 
 router.post("/services/create", secure.isAuthenticated, service.create)
+router.get("/services", secure.isAuthenticated, service.list)
+router.get("/services/:id", secure.isAuthenticated, service.detail)
+router.delete(
+  "/services/:id",
+  secure.isAuthenticated,
+  servicesMid.isOwnedByUser,
+  service.delete
+)
 
 module.exports = router;

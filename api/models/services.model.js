@@ -41,6 +41,20 @@ const serviceSchema = new Schema(
         required: true,
       },
     },
+  },
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret.__v;
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.password;
+
+        return ret;
+      },
+    },
   }
 )
 
