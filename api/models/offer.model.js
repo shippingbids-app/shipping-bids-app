@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { services, capacities} = require("../data")
 
 const offerSchema = new Schema(
   {
@@ -8,10 +9,25 @@ const offerSchema = new Schema(
       required: "Offers require a title",
       trim: true,
     },
-    product: {
-      type: String,
-      required: "Dimmensions are required",
-      trim: true,
+    logistics_capacity: {
+      type: [
+        {
+          type: String,
+          required: "Logistics capacity is required",
+          enum: capacities.map((capacity) => capacity.value),
+        },
+      ],
+      default: [],
+    },
+    services: {
+      type: [
+        {
+          type: String,
+          required: "Service type is required",
+          enum: services.map((service) => service.value),
+        },
+      ],
+      default: [],
     },
     author: {
       ref: "User",
@@ -19,14 +35,17 @@ const offerSchema = new Schema(
       required: true,
     },
     origin: {
-      type: String,
-      required: "Origin place is required",
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
     },
     destination: {
-      type: String,
-      required: "Destination place is required",
-    },
-    location: {
       type: {
         type: String,
         enum: ["Point"],

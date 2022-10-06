@@ -5,7 +5,7 @@ const services = [
   { value: "household-appliance", label: "Household Appliance"},
   { value: "shop", label: "Shop" },
   { value: "fragile-merchandise", label: "Fragile Merchandise" },
-  { value: "particular", label: "Particular" },
+  { value: "others", label: "Others" },
 ];
 
 module.exports = services;

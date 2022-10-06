@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { auth, offer } = require("../controllers/");
+const { auth, offer, service } = require("../controllers/");
 const { secure, offersMid } = require("../middlewares");
 
 router.post("/register", auth.register);
@@ -18,5 +18,7 @@ router.delete(
   offersMid.isOwnedByUser,
   offer.delete
 );
+
+router.post("/services/create", secure.isAuthenticated, service.create)
 
 module.exports = router;

@@ -3,4 +3,5 @@ module.exports = {
   Offer: require("./offer.model"),
   Comment: require("./comment.model"),
   Bid: require("./bid.model"),
+  Service: require("./services.model")
 };

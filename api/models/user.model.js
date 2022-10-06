@@ -64,36 +64,6 @@ const userSchema = new Schema(
     //   ],
     //   default: [], //ESTO ES NECESARIO????
     // },
-    vehicles: {
-      type: [
-        {
-          type: String,
-          required: "Vehicle is required",
-          enum: vehicles.map((vehicle) => vehicle.value),
-        },
-      ],
-      default: [],
-    },
-    services: {
-      type: [
-        {
-          type: String,
-          required: "Service type is required",
-          enum: services.map((service) => service.value),
-        },
-      ],
-      default: [],
-    },
-    logistics_capacity: {
-      type: [
-        {
-          type: String,
-          required: "Logistics capacity is required",
-          enum: capacities.map((capacity) => capacity.value),
-        },
-      ],
-      default: [],
-    },
   },
   {
     timestamps: true,
@@ -114,7 +84,13 @@ const userSchema = new Schema(
 userSchema.virtual("offers", {
   ref: "Offer",
   localField: "_id",
-  foreignField: "user"
+  foreignField: "author"
+})
+
+userSchema.virtual("services", {
+  ref: "Service",
+  localField: "_id",
+  foreignField: "author"
 })
 
 userSchema.pre("save", function (next) {

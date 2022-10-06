@@ -58,7 +58,8 @@ module.exports.listUsers = (req, res, next) => {
 
 module.exports.profile = (req, res, next) => {
   User.findById(req.params.id)
-    .populate("offers, title")
+    .populate("offers", "title")
+    .populate("services")
     .then((user) => {
       if (user) {
         res.json(user);

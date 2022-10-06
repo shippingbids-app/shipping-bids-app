@@ -8,7 +8,11 @@ module.exports.create = (req, res, next) => {
   offer.author = req.user.id;
 
   if (lat && lng) {
-    offer.location = {
+    offer.origin = {
+      type: "Point",
+      coordinates: [lng, lat],
+    },
+    offer.destination = {
       type: "Point",
       coordinates: [lng, lat],
     };
@@ -22,7 +26,7 @@ module.exports.list = (req, res, next) => {
   const { lat, lng } = req.query;
   const criterial = {};
   if (lat && lng) {
-    criterial.location = {
+    criterial.origin = {
       $near: {
         $geometry: {
           type: "Point",
