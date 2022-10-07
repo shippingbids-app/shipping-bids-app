@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { auth, offer, service, comment } = require("../controllers/");
+const { auth, offer, service, comment, bid } = require("../controllers/");
 const {
   secure,
   offersMid,
   servicesMid,
   commentsMid,
+  bidMid
 } = require("../middlewares");
 
 router.post("/register", auth.register);
@@ -47,6 +48,14 @@ router.delete(
   secure.isAuthenticated,
   commentsMid.isComentOwnedByUser,
   comment.delete
+);
+
+router.post("/offers/:id/bid", secure.isAuthenticated, bid.create);
+router.delete(
+  "/offers/:id/bid/:bidId",
+  secure.isAuthenticated,
+  bidMid.bidIsOwnedByUser,
+  bid.delete
 );
 
 module.exports = router;

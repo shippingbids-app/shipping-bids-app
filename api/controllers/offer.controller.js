@@ -1,6 +1,5 @@
 const createError = require("http-errors");
 const { Offer } = require("../models");
-const mongoose = require("mongoose");
 
 module.exports.create = (req, res, next) => {
   const { lat, lng } = req.body;
@@ -56,6 +55,7 @@ module.exports.detail = (req, res, next) => {
       path: "comments",
       populate: {
         path: "user",
+        select: "username email"
       },
     })
     .then((offer) => {
