@@ -9,7 +9,7 @@ module.exports.isOwnedByUser = (req, res, next) => {
         req.offer = offer;
         next();
       } else if (offer) {
-        next(createError(403, "You have no permission to be here"));
+        next(createError(403, "You're not authorized to do this"));
       } else {
         next(createError(404, "Offer not found"));
       }

@@ -11,7 +11,7 @@ module.exports.isComentOwnedByUser = (req, res, next) => {
           req.comment = comment;
           next();
         } else {
-          next(createError(403, "You have no permission to be here"));
+          next(createError(403, "You're not authorized to do this"));
         }
       } else {
         next(createError(404, "Comment not found"));

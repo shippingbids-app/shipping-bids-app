@@ -38,22 +38,22 @@ const offerSchema = new Schema(
       type: {
         type: String,
         enum: ["Point"],
-        required: true,
+        // required: true,
       },
       coordinates: {
         type: [Number],
-        required: true,
+        // required: true,
       },
     },
     destination: {
       type: {
         type: String,
         enum: ["Point"],
-        required: true,
+        // required: true,
       },
       coordinates: {
         type: [Number],
-        required: true,
+        // required: true,
       },
     },
     expiration_date: {

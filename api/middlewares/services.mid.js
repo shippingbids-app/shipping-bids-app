@@ -9,7 +9,7 @@ module.exports.isOwnedByUser = (req, res, next) => {
         req.service = service;
         next();
       } else if (service) {
-        next(createError(403, "You have no permission to be here"));
+        next(createError(403, "You're not authorized to do this"));
       } else {
         next(createError(404, "Service not found"));
       }
