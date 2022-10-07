@@ -1,4 +1,4 @@
-const Comment = require("../models");
+const { Comment } = require("../models");
 const createError = require("http-errors");
 
 module.exports.isComentOwnedByUser = (req, res, next) => {

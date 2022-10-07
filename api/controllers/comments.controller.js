@@ -1,10 +1,11 @@
-const Comment = require("../models");
 const createError = require("http-errors");
+const { Comment } = require("../models");
+const mongoose = require('mongoose')
 
 module.exports.create = (req, res, next) => {
   Comment.create({
     text: req.body.text,
-    stream: req.params.id,
+    offer: req.params.id,
     user: req.user.id,
   })
     .then((comment) => res.status(201).json(comment))
@@ -14,5 +15,5 @@ module.exports.create = (req, res, next) => {
 module.exports.delete = (req, res, next) => {
   Comment.findByIdAndDelete({ _id: req.comment.id })
     .then(() => res.status(204).send())
-    .cathc(next);
+    .catch(next);
 };

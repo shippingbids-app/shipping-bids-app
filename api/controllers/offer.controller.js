@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Offer = require("../models/offer.model");
 const createError = require("http-errors");
+const { Offer } = require("../models");
+const mongoose = require("mongoose");
 
 module.exports.create = (req, res, next) => {
   const { lat, lng } = req.body;

@@ -36,7 +36,7 @@ router.delete(
 
 router.post("/offers/:id/comments", secure.isAuthenticated, comment.create);
 router.delete(
-  "/streams/:id/comments/:commentId",
+  "/offers/:id/comments/:commentId",
   secure.isAuthenticated,
   commentsMid.isComentOwnedByUser,
   comment.delete
