@@ -75,3 +75,9 @@ module.exports.profileUpdate = (req, res, next) => {
     .then((user) => res.json(user))
     .catch(next);
 };
+
+module.exports.logout = (req, res, next) => {
+  req.session.destroy();
+  req.session = null;
+  res.status(204).send();
+};
