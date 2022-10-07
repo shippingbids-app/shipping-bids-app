@@ -17,9 +17,16 @@ module.exports.list = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   Service.findById(req.params.id)
+    .populate("author", "username")
     .then((service) => res.json(service))
     .catch(next)
 }
+
+module.exports.updateService = (req, res, next) => {
+  Service.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((service) => res.json(service))
+    .catch(next);
+};
 
 module.exports.delete = (req, res, next) => {
   Service.findByIdAndDelete(req.params.id)

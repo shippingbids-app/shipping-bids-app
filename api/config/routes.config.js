@@ -27,12 +27,19 @@ router.delete(
 router.post("/services/create", secure.isAuthenticated, service.create);
 router.get("/services", secure.isAuthenticated, service.list);
 router.get("/services/:id", secure.isAuthenticated, service.detail);
+router.patch(
+  "/services/:id",
+  secure.isAuthenticated,
+  servicesMid.isOwnedByUser,
+  service.updateService
+);
 router.delete(
   "/services/:id",
   secure.isAuthenticated,
   servicesMid.isOwnedByUser,
   service.delete
 );
+
 
 router.post("/offers/:id/comments", secure.isAuthenticated, comment.create);
 router.delete(
