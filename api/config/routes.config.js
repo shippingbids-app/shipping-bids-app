@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { auth, offer, service } = require("../controllers/");
-const { secure, offersMid, servicesMid } = require("../middlewares");
+const { auth, offer, service, comment } = require("../controllers/");
+const {
+  secure,
+  offersMid,
+  servicesMid,
+  commentsMid,
+} = require("../middlewares");
 
 router.post("/register", auth.register);
 router.post("/authenticate", auth.authenticate);
@@ -19,14 +24,22 @@ router.delete(
   offer.delete
 );
 
-router.post("/services/create", secure.isAuthenticated, service.create)
-router.get("/services", secure.isAuthenticated, service.list)
-router.get("/services/:id", secure.isAuthenticated, service.detail)
+router.post("/services/create", secure.isAuthenticated, service.create);
+router.get("/services", secure.isAuthenticated, service.list);
+router.get("/services/:id", secure.isAuthenticated, service.detail);
 router.delete(
   "/services/:id",
   secure.isAuthenticated,
   servicesMid.isOwnedByUser,
   service.delete
-)
+);
+
+router.post("/offers/:id/comments", secure.isAuthenticated, comments.create);
+router.delete(
+  "/streams/:id/comments/:commentId",
+  secure.isAuthenticated,
+  commentsMid.isComentOwnedByUser,
+  comment.delete
+);
 
 module.exports = router;

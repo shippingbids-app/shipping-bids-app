@@ -4,7 +4,6 @@ const { vehicles, capacities } = require("../data")
 
 const serviceSchema = new Schema(
   {
-    // title: {},
     author: {
       ref: "User",
       type: mongoose.Schema.Types.ObjectId,

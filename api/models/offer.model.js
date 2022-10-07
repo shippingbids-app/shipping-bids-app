@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const { services, capacities} = require("../data")
+const { services, capacities } = require("../data");
 
 const offerSchema = new Schema(
   {
@@ -66,16 +66,31 @@ const offerSchema = new Schema(
       trim: true,
     },
   },
-  { timestamps: true,
-  toJSON: {
-    transform: (doc, ret) => {
-      delete ret.__v;
-      ret.id = ret._id;
-      delete ret._id;
-      return ret;
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret.__v;
+        ret.id = ret._id;
+        delete ret._id;
+        return ret;
+      },
     },
-  } }
+  }
 );
+
+offerSchema.virtual("comments", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "offer",
+});
+
+offerSchema.virtual("bids", {
+  ref: "Bid",
+  localField: "_id",
+  foreignField: "offer",
+});
 
 offerSchema.index({ location: "2dsphere" });
 

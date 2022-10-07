@@ -8,14 +8,14 @@ module.exports.create = (req, res, next) => {
   offer.author = req.user.id;
 
   if (lat && lng) {
-    offer.origin = {
+    (offer.origin = {
       type: "Point",
       coordinates: [lng, lat],
-    },
-    offer.destination = {
-      type: "Point",
-      coordinates: [lng, lat],
-    };
+    }),
+      (offer.destination = {
+        type: "Point",
+        coordinates: [lng, lat],
+      });
   }
   Offer.create(offer)
     .then((offer) => res.status(201).json(offer))
@@ -45,6 +45,19 @@ module.exports.list = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   Offer.findById(req.params.id)
+    .populate("author", "username")
+    .populate({
+      path: "bids",
+      populate: {
+        path: "user",
+      },
+    })
+    .populate({
+      path: "comments",
+      populate: {
+        path: "user",
+      },
+    })
     .then((offer) => {
       if (offer) {
         res.json(offer);
