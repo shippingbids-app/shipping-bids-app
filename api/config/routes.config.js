@@ -34,7 +34,7 @@ router.delete(
   service.delete
 );
 
-router.post("/offers/:id/comments", secure.isAuthenticated, comments.create);
+router.post("/offers/:id/comments", secure.isAuthenticated, comment.create);
 router.delete(
   "/streams/:id/comments/:commentId",
   secure.isAuthenticated,
