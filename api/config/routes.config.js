@@ -44,17 +44,17 @@ router.delete(
 );
 
 
-router.post("/offers/:id/comments", secure.isAuthenticated, comment.create);
+router.post("/offers/:commentId/comments", secure.isAuthenticated, comment.create);
 router.delete(
-  "/offers/:id/comments/:commentId",
+  "/offers/:commentId/comments/:id",
   secure.isAuthenticated,
   commentsMid.isComentOwnedByUser,
   comment.delete
 );
 
-router.post("/offers/:id/bid", secure.isAuthenticated, bid.create);
+router.post("/offers/:bidId/bid", secure.isAuthenticated, bid.create);
 router.delete(
-  "/offers/:id/bid/:bidId",
+  "/offers/:bidId/bid/:id",
   secure.isAuthenticated,
   bidMid.bidIsOwnedByUser,
   bid.delete
