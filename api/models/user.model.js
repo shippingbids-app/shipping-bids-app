@@ -44,16 +44,16 @@ const userSchema = new Schema(
       required: "Password is required",
       match: [PWD_PATTERN, "Password needs at least 8 chars"],
     },
-    phone_number: {
+    phoneNumber: {
       type: String,
       required: true,
       trim: true,
       unique: true,
       validate: {
-        validator: function(phone_number) {
+        validator: function(phoneNumber) {
           try {
-            let phoneNumber = "+34" + phone_number
-            return isValidNumber(phoneNumber)            
+            let esPhoneNumber = "+34" + phoneNumber
+            return isValidNumber(esPhoneNumber)            
           } catch (error) {
             return false
           }

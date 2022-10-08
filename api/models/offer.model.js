@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const { services, capacities } = require("../data");
+const { services, capacities, offerStates } = require("../data");
 
 const offerSchema = new Schema(
   {
@@ -9,7 +9,7 @@ const offerSchema = new Schema(
       required: "Offers require a title",
       trim: true,
     },
-    logistics_capacity: {
+    logisticsCapacity: {
       type: [
         {
           type: String,
@@ -34,33 +34,46 @@ const offerSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    originAddress: {
+      type: String,
+      // required: true,
+    },
     origin: {
       type: {
         type: String,
         enum: ["Point"],
-        // required: true,
       },
       coordinates: {
         type: [Number],
-        // required: true,
       },
+    },
+    destinationAddress: {
+      type: String,
+      // required: true,
     },
     destination: {
       type: {
         type: String,
         enum: ["Point"],
-        // required: true,
       },
       coordinates: {
         type: [Number],
-        // required: true,
       },
     },
-    expiration_date: {
+    expirationDate: {
       type: Date,
       required: "Date is required for bids",
     },
-    initial_price: {
+    offerState: {
+      type: [
+        {
+          type: String,
+          enum: offerStates.map((offerState) => offerState.value),
+        },
+      ],
+      default: [],
+    },
+    initialPrice: {
       type: Number,
       required: "Initial prices is required for bids",
       trim: true,
@@ -74,8 +87,9 @@ const offerSchema = new Schema(
         delete ret.__v;
         ret.id = ret._id;
         delete ret._id;
-        ret.origin = ret.origin?.coordinates.reverse() || []
-        ret.destination = ret.destination?.coordinates.reverse() || []
+        // ret.origin = ret.origin?.coordinates.reverse() || [];
+        // ret.destination = ret.destination?.coordinates.reverse() || [];
+
         return ret;
       },
     },

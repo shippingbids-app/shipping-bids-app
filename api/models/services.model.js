@@ -19,7 +19,7 @@ const serviceSchema = new Schema(
       ],
       default: [],
     },
-    logistics_capacity: {
+    logisticsCapacity: {
       type: [
         {
           type: String,
@@ -29,11 +29,14 @@ const serviceSchema = new Schema(
       ],
       default: [],
     },
+    address: {
+      type: String,
+      required: true
+    },
     location: {
       type: {
         type: String,
         enum: ["Point"],
-        // required: true,
       },
       coordinates: {
         type: [Number],
@@ -50,6 +53,7 @@ const serviceSchema = new Schema(
         ret.id = ret._id;
         delete ret._id;
         delete ret.password;
+        ret.location = ret.location?.coordinates.reverse() || [];
 
         return ret;
       },
