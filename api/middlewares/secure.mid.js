@@ -1,4 +1,3 @@
-const { User } = require("../models");
 const createError = require("http-errors");
 
 module.exports.isAuthenticated = (req, res, next) => {

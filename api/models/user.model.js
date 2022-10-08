@@ -2,14 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 const { parsePhoneNumber, isPossiblePhoneNumber, isValidNumber} = require("libphonenumber-js")
-// const roles = require("../data/roles")
-// const { capacities, services, vehicles } = require("../data")
 
 const EMAIL_PATTERN =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PWD_PATTERN = /.{8,}$/;
-// const PHN_PATTERN =
-//   /^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
 const WORK_FACTOR = 10;
 
 const userSchema = new Schema(
@@ -32,7 +28,7 @@ const userSchema = new Schema(
             return false;
           }
         },
-        message: (image) => "Invalid URL", //IMAGE AQUI SIRVE PARA ALGO???
+        message: (image) => "Invalid URL",
       },
     },
     email: {
@@ -53,7 +49,6 @@ const userSchema = new Schema(
       required: true,
       trim: true,
       unique: true,
-      // match: [PHN_PATTERN, "Invalid phone number"],
       validate: {
         validator: function(phone_number) {
           try {
@@ -67,16 +62,6 @@ const userSchema = new Schema(
         message: "Phone number is invalid"
       }
     },
-    // roles: {
-    //   type: [
-    //     {
-    //       type: String,
-    //       required: "Role is required",
-    //       enum: roles.map((role) => role.value),
-    //     },
-    //   ],
-    //   default: [], //ESTO ES NECESARIO????
-    // },
   },
   {
     timestamps: true,
