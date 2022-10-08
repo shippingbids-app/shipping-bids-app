@@ -6,6 +6,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 
 require("./config/db.config");
+require("./config/cron.config")
 
 const app = express();
 

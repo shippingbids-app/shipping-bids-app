@@ -2,20 +2,23 @@ const createError = require("http-errors");
 const { Offer } = require("../models");
 
 module.exports.create = (req, res, next) => {
-  const { lat, lng } = req.body;
+  const { origin, destination } = req.body;
   const offer = req.body;
   offer.author = req.user.id;
 
-  if (lat && lng) {
-    (offer.origin = {
+  if (origin) {
+    offer.origin = {
       type: "Point",
-      coordinates: [lng, lat],
-    }),
-      (offer.destination = {
-        type: "Point",
-        coordinates: [lng, lat],
-      });
+      coordinates: origin.reverse()
+    }
   }
+  if (destination) {
+    offer.destination = {
+      type: "Point",
+      coordinates: destination.reverse()
+    }
+  }
+
   Offer.create(offer)
     .then((offer) => res.status(201).json(offer))
     .catch(next);

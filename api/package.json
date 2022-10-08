@@ -19,6 +19,7 @@
     "libphonenumber-js": "^1.10.13",
     "mongoose": "^6.6.4",
     "morgan": "^1.10.0",
+    "node-cron": "^3.0.2",
     "nodemailer": "^6.8.0"
   },
   "devDependencies": {

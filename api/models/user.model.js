@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
-const { parsePhoneNumber, isPossiblePhoneNumber, isValidNumber} = require("libphonenumber-js")
+const { isValidNumber} = require("libphonenumber-js")
 
 const EMAIL_PATTERN =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -52,7 +52,6 @@ const userSchema = new Schema(
       validate: {
         validator: function(phone_number) {
           try {
-            parsePhoneNumber(phone_number, "ES")
             let phoneNumber = "+34" + phone_number
             return isValidNumber(phoneNumber)            
           } catch (error) {
