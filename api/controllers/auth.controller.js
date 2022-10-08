@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 const { User } = require("../models");
 const mongoose = require("mongoose");
+const mailer = require("../mail/mailer");
 
 module.exports.register = (req, res, next) => {
   const { email } = req.body;
@@ -14,7 +15,10 @@ module.exports.register = (req, res, next) => {
           })
         );
       } else {
-        return User.create(req.body).then((user) => res.status(201).json(user));
+        return User.create(req.body).then((user) => {
+          mailer.sendWelcome(user)
+          res.status(201).json(user);
+        });
       }
     })
     .catch(next);
