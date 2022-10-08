@@ -51,6 +51,7 @@ module.exports.detail = (req, res, next) => {
       path: "bids",
       populate: {
         path: "user",
+        select: "username vehicles"
       },
     })
     .populate({
