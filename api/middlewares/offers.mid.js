@@ -16,3 +16,18 @@ module.exports.isOwnedByUser = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.authorCanNotMakeBids = (req, res, next) => {
+  const { id } = req.params;
+  Offer.findById(id)
+    .then((offer) => {
+      if (offer?.author != req.user?.id) {
+        next();
+      } else if (offer) {
+        next(createError(403, "You're not authorized to do this"));
+      } else {
+        next(createError(404, "Offer not found"));
+      }
+    })
+    .catch(next);
+};

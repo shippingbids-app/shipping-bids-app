@@ -6,7 +6,7 @@ const {
   offersMid,
   servicesMid,
   commentsMid,
-  bidMid
+  bidMid,
 } = require("../middlewares");
 
 router.post("/register", auth.register);
@@ -15,7 +15,6 @@ router.get("/users", secure.isAuthenticated, auth.listUsers);
 router.get("/profile/:id", secure.isAuthenticated, auth.profile);
 router.patch("/profile/:id", secure.isAuthenticated, auth.profileUpdate);
 router.delete("/logout", auth.logout);
-
 
 router.post("/offers/create", secure.isAuthenticated, offer.create);
 router.get("/offers", secure.isAuthenticated, offer.list);
@@ -26,6 +25,27 @@ router.delete(
   offersMid.isOwnedByUser,
   offer.delete
 );
+
+router.post("/offers/:offerId/bids", secure.isAuthenticated, offersMid.authorCanNotMakeBids, bid.create);
+router.delete(
+  "/offers/:offerId/bids/:id",
+  secure.isAuthenticated,
+  bidMid.bidIsOwnedByUser,
+  bid.delete
+);
+
+router.post(
+  "/offers/:offerId/comments",
+  secure.isAuthenticated,
+  comment.create
+);
+router.delete(
+  "/offers/:offerId/comments/:id",
+  secure.isAuthenticated,
+  commentsMid.isComentOwnedByUser,
+  comment.delete
+);
+
 
 router.post("/services/create", secure.isAuthenticated, service.create);
 router.get("/services", secure.isAuthenticated, service.list);
@@ -41,23 +61,6 @@ router.delete(
   secure.isAuthenticated,
   servicesMid.isOwnedByUser,
   service.delete
-);
-
-
-router.post("/offers/:commentId/comments", secure.isAuthenticated, comment.create);
-router.delete(
-  "/offers/:commentId/comments/:id",
-  secure.isAuthenticated,
-  commentsMid.isComentOwnedByUser,
-  comment.delete
-);
-
-router.post("/offers/:bidId/bid", secure.isAuthenticated, bid.create);
-router.delete(
-  "/offers/:bidId/bid/:id",
-  secure.isAuthenticated,
-  bidMid.bidIsOwnedByUser,
-  bid.delete
 );
 
 module.exports = router;
