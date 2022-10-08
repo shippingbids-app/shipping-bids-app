@@ -3,7 +3,7 @@ const transporter = require("../config/mail.config");
 module.exports.sendWelcome = (user) => {
   transporter
     .sendMail({
-      from: "shipping-bids-app<tvtrackerweb@gmail.com>",
+      from: "shipping-bids-app<shippingbids@gmail.com>",
       to: `${user.email}`,
       subject: `Welcome ${user.username}`,
       html: `<h3>Hola, bienvenido.</h3>
