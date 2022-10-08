@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
-const parsePhoneNumber = require("libphonenumber-js")
+const { parsePhoneNumber, isPossiblePhoneNumber, isValidNumber} = require("libphonenumber-js")
 // const roles = require("../data/roles")
 // const { capacities, services, vehicles } = require("../data")
 
@@ -49,11 +49,23 @@ const userSchema = new Schema(
       match: [PWD_PATTERN, "Password needs at least 8 chars"],
     },
     phone_number: {
-      type: Number,
+      type: String,
       required: true,
       trim: true,
       unique: true,
-      match: [PHN_PATTERN, "Invalid phone number"],
+      // match: [PHN_PATTERN, "Invalid phone number"],
+      validate: {
+        validator: function(phone_number) {
+          try {
+            parsePhoneNumber(phone_number, "ES")
+            let phoneNumber = "+34" + phone_number
+            return isValidNumber(phoneNumber)            
+          } catch (error) {
+            return false
+          }
+        },
+        message: "Phone number is invalid"
+      }
     },
     // roles: {
     //   type: [
