@@ -17,8 +17,8 @@ router.patch("/profile/:id", secure.isAuthenticated, auth.profileUpdate);
 router.delete("/logout", auth.logout);
 
 router.post("/offers/create", secure.isAuthenticated, offer.create);
-router.get("/offers", offer.list);
-router.get("/offers/:id", offer.detail);
+router.get("/offers", secure.isAuthenticated, offer.list);
+router.get("/offers/:id", secure.isAuthenticated, offer.detail);
 router.delete(
   "/offers/:id",
   secure.isAuthenticated,

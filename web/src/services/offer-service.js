@@ -27,3 +27,7 @@ export function getOffers() {
 export function getOffer(id) {
   return http.get(`/offers/${id}`)
 }
+
+export function authenticate(data) {
+  return http.post("/authenticate", data);
+}
