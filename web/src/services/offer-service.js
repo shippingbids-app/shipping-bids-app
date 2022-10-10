@@ -31,3 +31,11 @@ export function getOffer(id) {
 export function authenticate(data) {
   return http.post("/authenticate", data);
 }
+
+export function getProfile() {
+  return http.get("/profile")
+}
+
+export function getUserProfile(id) {
+  return http.get(`/users/${id}`)
+}

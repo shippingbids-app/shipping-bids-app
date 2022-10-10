@@ -16,12 +16,12 @@ function App() {
     <>
       <NavBar />
 
-      <div className="container my-5 py-3">
+      <div className="container my-5">
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/offers" element={<OfferListScreen />} />
-          <Route path="/user" element={<UserDetailScreen />} />
+          <Route path="/users/:id" element={<UserDetailScreen />} />
           <Route path="/map" element={<MapScreen />} />
           <Route path="/offers/:id" element={<OfferDetail />} />
         </Routes>
