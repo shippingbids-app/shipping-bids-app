@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { AuthContext } from '../../../contexts/AuthContext'
 
 function NavBar() {
+  const user = useContext(AuthContext)
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
@@ -19,7 +21,7 @@ function NavBar() {
                 <NavLink to="/map" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Map</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/user" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>User</NavLink>
+                <NavLink to={`/users/${user.user.id}`} className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Profile</NavLink>
               </li>
             </ul>
             <form className="d-flex" role="search">

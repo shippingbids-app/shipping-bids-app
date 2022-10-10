@@ -21,9 +21,9 @@ function App() {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/offers" element={<OfferListScreen />} />
+          <Route path="/offers/:id" element={<OfferDetail />} />
           <Route path="/users/:id" element={<UserDetailScreen />} />
           <Route path="/map" element={<MapScreen />} />
-          <Route path="/offers/:id" element={<OfferDetail />} />
         </Routes>
       </div>
     </>
