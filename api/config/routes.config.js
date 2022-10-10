@@ -11,9 +11,10 @@ const {
 
 router.post("/register", auth.register);
 router.post("/authenticate", auth.authenticate);
+router.get("/profile", auth.profile)
 router.get("/users", secure.isAuthenticated, auth.listUsers);
-router.get("/profile/:id", secure.isAuthenticated, auth.profile);
-router.patch("/profile/:id", secure.isAuthenticated, auth.profileUpdate);
+router.get("/users/:id", secure.isAuthenticated, auth.userProfile);
+router.patch("/users/:id", secure.isAuthenticated, auth.userProfileUpdate);
 router.delete("/logout", auth.logout);
 
 router.post("/offers/create", secure.isAuthenticated, offer.create);

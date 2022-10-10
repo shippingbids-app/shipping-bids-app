@@ -2,6 +2,10 @@ const createError = require("http-errors");
 const { User } = require("../models");
 const mailer = require("../mail/mailer");
 
+module.exports.profile = (req, res, next) => {
+  res.json(req.user)
+}
+
 module.exports.register = (req, res, next) => {
   const { email } = req.body;
   User.findOne({ email })
@@ -59,7 +63,7 @@ module.exports.listUsers = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.profile = (req, res, next) => {
+module.exports.userProfile = (req, res, next) => {
   User.findById(req.params.id)
     .populate("offers", "title")
     .populate("services")
@@ -73,7 +77,7 @@ module.exports.profile = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.profileUpdate = (req, res, next) => {
+module.exports.userProfileUpdate = (req, res, next) => {
   User.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((user) => res.json(user))
     .catch(next);
