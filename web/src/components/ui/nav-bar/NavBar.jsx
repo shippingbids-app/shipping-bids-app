@@ -1,9 +1,20 @@
 import React, { useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../contexts/AuthContext'
+import { userLogout } from '../../../services/offer-user-service'
 
 function NavBar() {
   const user = useContext(AuthContext)
+  const navigation = useNavigate(); 
+
+  const handleClick = () => {
+    userLogout()
+      .then(() => {
+        console.log("session finished");
+        user.logOut()     
+      })
+      .catch((error) => console.error(error))
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
@@ -21,13 +32,14 @@ function NavBar() {
                 <NavLink to="/map" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Map</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to={`/users/${user.user.id}`} className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Profile</NavLink>
+                <NavLink to={`/users/${user?.user?.id}`} className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Profile</NavLink>
               </li>
             </ul>
             <form className="d-flex" role="search">
               <input className="form-control me-2" type="search" placeholder="Search" />
               <button className="btn btn-outline-success" type="submit">Search</button>
             </form>
+            { user?.user && <button className='btn btn-link text-decoration-none text-danger mt-3' onClick={handleClick}>Logout</button> }
           </div>
         </div>
       </nav>

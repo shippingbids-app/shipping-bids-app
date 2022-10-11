@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 function HomeScreen() {
   const value = useContext(AuthContext);
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    setUser(value)
+  }, [value])
+  console.log(user)
+  if (!user) return <></>
   return (
     <div>
-      <h1>Hi {value.user.username}!</h1>
+      <h1>Hi {user?.user?.username}!</h1>
 
       <br />
       <h4>Welcome to Shipping Bids</h4>
@@ -18,7 +25,7 @@ function HomeScreen() {
           </div>
         </Link>
 
-        {value.user ? (
+        {user?.user ? ( 
           <></>
         ) : (
           <Link to={"/register"} className="text-decoration-none">

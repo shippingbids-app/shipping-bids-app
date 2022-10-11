@@ -43,3 +43,7 @@ export function getUserProfile(id) {
 export function userRegister(data) {
   return http.post("/register", data)
 }
+
+export function userLogout() {
+  return http.delete("/logout")
+}
