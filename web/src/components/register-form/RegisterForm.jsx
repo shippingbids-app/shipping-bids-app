@@ -110,6 +110,9 @@ function RegisterForm() {
             placeholder="Profile image..."
             {...register("image")}
           />
+          {errors.image && (
+            <div className="invalid-feedback">{errors.image.message}</div>
+          )}
         </div>
         <div className="d-grid mt-3">
           <button className="btn btn-success" type="submit" disabled={!isValid}>

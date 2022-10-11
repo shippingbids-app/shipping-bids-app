@@ -104,6 +104,11 @@ userSchema.pre("save", function (next) {
   }
 });
 
+userSchema.pre("validate", function(next) {
+  this.image = this.image || undefined
+  next()
+}),
+
 userSchema.methods.checkPassword = function (passwordToCheck) {
   return bcrypt.compare(passwordToCheck, this.password);
 };
