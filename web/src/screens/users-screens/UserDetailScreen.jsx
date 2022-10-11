@@ -5,6 +5,7 @@ import { getUserProfile } from "../../services/offer-user-service";
 function UserDetailScreen() {
   const [user, setuser] = useState(null);
   const { id } = useParams();
+  const services = user?.services[0]
 
   useEffect(() => {
     getUserProfile(id)
@@ -61,9 +62,19 @@ function UserDetailScreen() {
         </ul>
         <ul className="list-group pt-3">
           <h3 className="ms-5 text-primary">Services: </h3>
-          {user?.services.map((service) => (
-            <li className="list-group-item" key={service.id}>
-              Service available on: <b>{service.address}</b>
+          <li className="list-group-item">
+            Service available on: <b>{services.address}</b>
+          </li>
+          <h4 className="ms-5 text-primary">Vehicles:</h4>
+          {services.vehicles.map((vehicle) => (
+            <li className="list-group-item" key={vehicle}>
+              <b>{vehicle}</b>
+            </li>
+          ))}
+          <h4 className="ms-5 text-primary">Capacity:</h4>
+          {services.logisticsCapacity.map((capacity) => (
+            <li className="list-group-item" key={capacity}>
+              <b>{capacity}</b>
             </li>
           ))}
         </ul>
