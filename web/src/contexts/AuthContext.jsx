@@ -1,27 +1,27 @@
-import React, { createContext, useEffect, useState } from 'react'
-import * as offerService from "../services/offer-service";
+import React, { createContext, useEffect, useState } from "react";
+import * as offerService from "../services/offer-user-service";
 
-
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(undefined)
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
-    offerService.getProfile()
+    offerService
+      .getProfile()
       .then((user) => setUser(user))
-      .catch((user) => setUser(null))
-  }, [])
+      .catch((user) => setUser(null));
+  }, []);
 
   const value = {
     user,
     setUser,
-  }
+  };
 
   if (user === undefined) {
-    return <></>
+    return <></>;
   }
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export default AuthContextProvider
+export default AuthContextProvider;

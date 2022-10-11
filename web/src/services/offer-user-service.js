@@ -40,6 +40,6 @@ export function getUserProfile(id) {
   return http.get(`/users/${id}`)
 }
 
-export function register(data) {
+export function userRegister(data) {
   return http.post("/register", data)
 }

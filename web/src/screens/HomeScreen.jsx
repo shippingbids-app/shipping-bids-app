@@ -12,16 +12,21 @@ function HomeScreen() {
       <h4>Welcome to Shipping Bids</h4>
 
       <div className="d-flex justify-content-around">
-      <Link to={"/offers"} className="text-decoration-none">
-        <div className="mt-5">
-          <button className="btn btn-danger">Go to offers</button>
-        </div>
-      </Link>
-      <Link to={"/register"} className="text-decoration-none">
-        <div className="mt-5">
-          <button className="btn btn-success">Register</button>
-        </div>
-      </Link>
+        <Link to={"/offers"} className="text-decoration-none">
+          <div className="mt-5">
+            <button className="btn btn-danger">Go to offers</button>
+          </div>
+        </Link>
+
+        {value.user ? (
+          <></>
+        ) : (
+          <Link to={"/register"} className="text-decoration-none">
+            <div className="mt-5">
+              <button className="btn btn-success">Register</button>
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );

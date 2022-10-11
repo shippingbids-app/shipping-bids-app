@@ -1,8 +1,8 @@
-import { React, useContext } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { register } from "../../services/offer-service";
+import { userRegister } from "../../services/offer-user-service";
 
 function RegisterForm() {
   const navigation = useNavigate();
@@ -11,11 +11,26 @@ function RegisterForm() {
     register,
     handleSubmit,
     control,
+    setError,
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
   const handleRegister = (data) => {
-    register(data);
+
+    userRegister(data)
+      .then((data) => {
+        console.log(`${data.username} created`);
+        navigation("/offers");
+      })
+      .catch((error) => {
+        if (error.response?.data?.errors) {
+          const { errors } = error.response.data;
+          console.log(errors);
+          Object.keys(error.response.data.errors).forEach((error) => {
+            setError(error, { message: errors[error].message });
+          });
+        }
+      });
   };
 
   return (

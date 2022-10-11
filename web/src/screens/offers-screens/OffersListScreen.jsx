@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OfferCard from "../../components/offer-card/OfferCard";
-import * as offerService from "../../services/offer-service";
+import * as offerService from "../../services/offer-user-service";
 
 function OffersListScreen() {
   const [offers, setOffers] = useState([]);
