@@ -39,3 +39,7 @@ export function getProfile() {
 export function getUserProfile(id) {
   return http.get(`/users/${id}`)
 }
+
+export function register(data) {
+  return http.post("/register", data)
+}

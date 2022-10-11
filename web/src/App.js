@@ -8,6 +8,7 @@ import {
   LoginScreen,
 } from "./screens";
 import NavBar from "./components/ui/nav-bar/NavBar.jsx";
+import RegisterScreen from "./screens/users-screens/RegisterScreen";
 
 
 
@@ -19,6 +20,7 @@ function App() {
       <div className="container my-5">
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/register" element={<RegisterScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/offers" element={<OfferListScreen />} />
           <Route path="/offers/:id" element={<OfferDetail />} />

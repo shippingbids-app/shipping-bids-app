@@ -1,8 +1,10 @@
 import { React, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { authenticate } from "../../services/offer-service";
+import Section from "../../components/section/Section"
 
 function LoginScreen() {
   const navigation = useNavigate();
@@ -35,6 +37,7 @@ function LoginScreen() {
 
   return (
     <div>
+      <Section title="Login" icon="sign-in">
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="input-group mb-1">
           <span className="input-group-text">
@@ -70,12 +73,21 @@ function LoginScreen() {
           )}
         </div>
 
-        <div className="d-grid mt-2">
+        <div className="d-grid mt-3">
           <button className="btn btn-primary" type="submit" disabled={!isValid}>
             Login
           </button>
         </div>
+        <hr className="dropdown-divider mb-4"></hr>
+        <Link to={"/register"} className="text-decoration-none">
+        <div className="d-grid mt-2">
+        <button className="btn btn-success">
+            Register
+          </button>
+        </div>
+        </Link>
       </form>
+      </Section>
     </div>
   );
 }
