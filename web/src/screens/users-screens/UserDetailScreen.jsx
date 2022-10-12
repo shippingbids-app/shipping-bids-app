@@ -3,13 +3,13 @@ import { useParams } from "react-router";
 import { getUserProfile } from "../../services/offer-user-service";
 
 function UserDetailScreen() {
-  const [user, setuser] = useState(null);
+  const [user, setUser] = useState(null);
   const { id } = useParams();
-  const services = user?.services[0]
+  const services = user?.services[0];
 
   useEffect(() => {
     getUserProfile(id)
-      .then((user) => setuser(user))
+      .then((user) => setUser(user))
       .catch((error) => console.error(error));
   }, [id]);
   console.log(user);
@@ -17,9 +17,9 @@ function UserDetailScreen() {
   if (!user) {
     return (
       <>
-        <div classNameName="d-flex justify-content-center mt-5 pt-5">
-          <div classNameName="spinner-border" role="status">
-            <span classNameName="visually-hidden">Loading...</span>
+        <div className="d-flex justify-content-center mt-5 pt-5">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       </>
@@ -60,24 +60,28 @@ function UserDetailScreen() {
             </li>
           ))}
         </ul>
-        <ul className="list-group pt-3">
-          <h3 className="ms-5 text-primary">Services: </h3>
-          <li className="list-group-item">
-            Service available on: <b>{services.address}</b>
-          </li>
-          <h4 className="ms-5 text-primary">Vehicles:</h4>
-          {services.vehicles.map((vehicle) => (
-            <li className="list-group-item" key={vehicle}>
-              <b>{vehicle}</b>
+        {services ? (
+          <ul className="list-group pt-3">
+            <h3 className="ms-5 text-primary">Services: </h3>
+            <li className="list-group-item">
+              Service available on: <b>{services.address}</b>
             </li>
-          ))}
-          <h4 className="ms-5 text-primary">Capacity:</h4>
-          {services.logisticsCapacity.map((capacity) => (
-            <li className="list-group-item" key={capacity}>
-              <b>{capacity}</b>
-            </li>
-          ))}
-        </ul>
+            <h4 className="ms-5 text-primary">Vehicles:</h4>
+            {services.vehicles.map((vehicle) => (
+              <li className="list-group-item" key={vehicle}>
+                <b>{vehicle}</b>
+              </li>
+            ))}
+            <h4 className="ms-5 text-primary">Capacity:</h4>
+            {services.logisticsCapacity.map((capacity) => (
+              <li className="list-group-item" key={capacity}>
+                <b>{capacity}</b>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
