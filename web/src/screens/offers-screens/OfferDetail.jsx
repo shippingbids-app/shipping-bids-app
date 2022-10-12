@@ -1,12 +1,15 @@
 import "./OfferDetail.css"
 import moment from "moment/moment";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as offerService from "../../services/offer-user-service";
+import { AuthContext } from "../../contexts/AuthContext";
+
 
 function OfferDetail() {
   const [offer, setOffer] = useState(null);
   const { offerId } = useParams();
+  const user = useContext(AuthContext)
   console.log(offer)
 
   useEffect(() => {
@@ -24,12 +27,26 @@ function OfferDetail() {
     offerService.createOfferComment(offerId, {text: form.text.value})
       .then((comment) => {
         console.log(comment)
-        setOffer({
-          ...offer,
-          comments: [...offer.comments, comment]
-        })
+        offerService.getOffer(offerId)
+          .then((offer) => setOffer(offer))
+        form.text.value = ""
       })
       .catch(error => console.error(error))
+  }
+
+  const handleDeleteComment = (comment) => {
+    const id = comment.id
+
+    if (comment.user.id !== user.user.id) {
+      alert("You can't delete this Comment")
+    }
+
+    offerService.deleteOfferComment(offerId, id)
+      .then(() => {
+        offerService.getOffer(offerId)
+          .then((offer) => setOffer(offer))
+      })
+      .catch((error) => console.error(error))
   }
 
   const handleNewBid = (event) => {
@@ -40,19 +57,25 @@ function OfferDetail() {
     offerService.createOfferBid(offerId, {bid: form.bid.value})
       .then((bid) => {
         console.log(bid)
-        setOffer({
-          ...offer,
-          bids: [...offer.bids, bid]
-        })
+        offerService.getOffer(offerId)
+          .then((offer) => setOffer(offer))
+        form.bid.value = ""
       })
       .catch(error => console.error(error))
   }
 
   const handleDeleteBid = (bid) => {
     const id = bid.id
-    console.log(bid)
+
+    if (bid.user.id !== user.user.id) {
+      alert("You can't delete this Bid")
+    }
+
     offerService.deleteOfferBid(offerId, id)
-      .then(() => console.log("offer erased"))
+      .then(() => { 
+        offerService.getOffer(offerId)
+          .then((offer) => setOffer(offer))
+        console.log("offer erased")})
       .catch((error) => console.error(error))
   }
 
@@ -95,9 +118,10 @@ function OfferDetail() {
 
       {offer.bids.map((bid) => (
         <div className="bidBox mb-4 border py-2 ps-2" key={bid.id}>
+          <small>Bid created by: <b>{bid.user.username}</b></small><br />
+          <br />
           <p>I am willing to make this shipment for: <b>{bid.bid}€</b></p>
-          <p>Bid id<b>{bid.id}</b></p>
-          <small>Bid created by: <b>{bid.user.username}</b></small>
+          
           <button className="deleteButton  btn btn-sm text-danger " onClick={() => handleDeleteBid(bid)}><b>X</b></button>
         </div>
       ))}
@@ -116,9 +140,11 @@ function OfferDetail() {
       </form>
 
       {offer.comments.map((comment) => (
-        <div className="mb-4 border-bottom py-2" key={comment.id}>
+        <div className="bidBox mb-4 border-bottom py-2" key={comment.id}>
+          <small>Comment by: <b>{comment.user.username}</b></small><br />
+          <br />
           <p>{comment.text}</p>
-          <small>Por {comment.user.username}</small>
+          <button className="deleteButton  btn btn-sm text-danger " onClick={() => handleDeleteComment(comment)}><b>X</b></button>
         </div>
       ))}
     </div>

@@ -52,6 +52,10 @@ export function createOfferComment(offerId, data) {
   return http.post(`/offers/${offerId}/comments`, data)
 }
 
+export function deleteOfferComment(offerId, id) {
+  return http.delete(`offers/${offerId}/comments/${id}`)
+}
+
 export function createOfferBid(offerId, data) {
   return http.post(`/offers/${offerId}/bids`, data)
 }

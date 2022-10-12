@@ -2,14 +2,14 @@ const { Comment } = require("../models");
 const createError = require("http-errors");
 
 module.exports.isComentOwnedByUser = (req, res, next) => {
-  const { commentId } = req.params;
+  const { id } = req.params;
 
-  Comment.findById(commentId)
+  Comment.findById(id)
     .then((comment) => {
       if (comment) {
-        if (comment.user == req.user.id) {
-          req.comment = comment;
-          next();
+        if (comment.user._id == req.user.id) {
+          return Comment.findByIdAndDelete(comment.id)
+            .then(() => res.status(204).send())
         } else {
           next(createError(403, "You're not authorized to do this"));
         }

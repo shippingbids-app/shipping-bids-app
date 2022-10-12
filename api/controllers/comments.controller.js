@@ -11,7 +11,7 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.delete = (req, res, next) => {
-  Comment.findByIdAndDelete({ _id: req.comment.id })
+  Comment.findByIdAndDelete({ id: req.comment.id })
     .then(() => res.status(204).send())
     .catch(next);
 };
