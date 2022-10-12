@@ -47,3 +47,7 @@ export function userRegister(data) {
 export function userLogout() {
   return http.delete("/logout")
 }
+
+export function createOfferComment(offerId, data) {
+  return http.post(`/offers/${offerId}/comments`, data)
+}

@@ -11,7 +11,7 @@ function OffersListScreen() {
       .then((offers) => setOffers(offers))
       .catch((error) => console.error(error));
   }, []);
-  console.log(offers);
+  
   return (
     <div className="container">
       {offers?.map((offer) => (

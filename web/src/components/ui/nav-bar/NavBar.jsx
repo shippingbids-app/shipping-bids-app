@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink} from 'react-router-dom'
 import { AuthContext } from '../../../contexts/AuthContext'
 import { userLogout } from '../../../services/offer-user-service'
 
+
 function NavBar() {
   const user = useContext(AuthContext)
-  const navigation = useNavigate(); 
 
   const handleClick = () => {
     userLogout()
@@ -17,6 +17,7 @@ function NavBar() {
   }
   return (
     <>
+    
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">Shipping Bids</Link>

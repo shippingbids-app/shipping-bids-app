@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import * as offerService from "../services/offer-user-service";
 
 export const AuthContext = createContext();
