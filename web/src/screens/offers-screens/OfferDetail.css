@@ -1,0 +1,9 @@
+.bidBox {
+  position: relative;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}

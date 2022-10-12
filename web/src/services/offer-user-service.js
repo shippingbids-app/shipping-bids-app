@@ -24,8 +24,8 @@ export function getOffers() {
   return http.get("/offers")
 }
 
-export function getOffer(id) {
-  return http.get(`/offers/${id}`)
+export function getOffer(offerId) {
+  return http.get(`/offers/${offerId}`)
 }
 
 export function authenticate(data) {
@@ -50,4 +50,12 @@ export function userLogout() {
 
 export function createOfferComment(offerId, data) {
   return http.post(`/offers/${offerId}/comments`, data)
+}
+
+export function createOfferBid(offerId, data) {
+  return http.post(`/offers/${offerId}/bids`, data)
+}
+
+export function deleteOfferBid(offerId, id) {
+  return http.delete(`offers/${offerId}/bids/${id}`)
 }

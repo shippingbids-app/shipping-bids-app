@@ -23,7 +23,7 @@ function App() {
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/offers" element={<OfferListScreen />} />
-          <Route path="/offers/:id" element={<OfferDetail />} />
+          <Route path="/offers/:offerId" element={<OfferDetail />} />
           <Route path="/users/:id" element={<UserDetailScreen />} />
           <Route path="/map" element={<MapScreen />} />
         </Routes>

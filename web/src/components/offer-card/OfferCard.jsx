@@ -11,6 +11,7 @@ function OfferCard({
   destinationAddress, 
   services,
   expirationDate}) {
+    const offerId = id
   return (
     <div className="card text-center my-2">
       <div className="card-header">
@@ -19,7 +20,7 @@ function OfferCard({
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <p className="card-text">Ship {logisticsCapacity[0]} box, from {originAddress} to {destinationAddress}</p>
-        <Link to={`/offers/${id}`} className="btn btn-primary">Go bid!</Link>
+        <Link to={`/offers/${offerId}`} className="btn btn-primary">Go bid!</Link>
       </div>
       <div className="card-footer text-muted">
         {author} {moment({expirationDate}).endOf("day").fromNow()}
