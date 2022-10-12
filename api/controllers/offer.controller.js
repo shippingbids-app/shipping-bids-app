@@ -45,7 +45,7 @@ module.exports.list = (req, res, next) => {
 };
 
 module.exports.detail = (req, res, next) => {
-  Offer.findById(req.params.id)
+  Offer.findById(req.params.offerId)
     .populate("author", "username")
     .populate({
       path: "bids",

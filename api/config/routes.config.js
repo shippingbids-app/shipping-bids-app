@@ -19,9 +19,9 @@ router.delete("/logout", auth.logout);
 
 router.post("/offers/create", secure.isAuthenticated, offer.create);
 router.get("/offers", secure.isAuthenticated, offer.list);
-router.get("/offers/:id", secure.isAuthenticated, offer.detail);
+router.get("/offers/:offerId", secure.isAuthenticated, offer.detail);
 router.delete(
-  "/offers/:id",
+  "/offers/:offerId",
   secure.isAuthenticated,
   offersMid.isOwnedByUser,
   offer.delete
