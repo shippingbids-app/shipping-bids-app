@@ -6,6 +6,7 @@ function UserDetailScreen() {
   const [user, setUser] = useState(null);
   const { id } = useParams();
   const services = user?.services[0];
+  const offers = user?.offers
 
   useEffect(() => {
     getUserProfile(id)
@@ -52,14 +53,17 @@ function UserDetailScreen() {
             Phone number: <b>{user?.phoneNumber}</b>
           </h5>
         </div>
-        <ul className="list-group pt-3">
+        {offers.length !== 0 ? (<ul className="list-group pt-3">
           <h3 className="ms-5 text-primary">Offers: </h3>
           {user?.offers.map((offer) => (
             <li className="list-group-item" key={offer.id}>
               Offer: {offer.title}
             </li>
           ))}
-        </ul>
+        </ul>) : (
+          <></>
+        )}
+        
         {services ? (
           <ul className="list-group pt-3">
             <h3 className="ms-5 text-primary">Services: </h3>

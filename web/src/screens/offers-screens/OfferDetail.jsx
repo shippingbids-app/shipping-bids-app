@@ -102,7 +102,72 @@ function OfferDetail() {
       <h3>OfferId: {offer.id}€</h3>
       <h3>Expiration date: {moment(offer.expirationDate).format("DD MMM YY, h:mm")}</h3>
 
-      <h5>Bids</h5>
+      <div className="accordion accordion-flush mt-5" id="accordionFlushExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingOne">
+            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              Bids
+            </button>
+          </h2>
+          <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div className="accordion-body">
+              <form onSubmit={handleNewBid} className="mb-3">
+                <input
+                  type="number"
+                  name="bid"
+                  className="form-control mb-2"
+                  placeholder="Add your bid"
+                />
+                <button type="submit" className="btn btn-sm btn-primary">
+                  Bid
+                </button>
+              </form>
+
+              {offer.bids.map((bid) => (
+                <div className="bidBox mb-4 border py-2 ps-2" key={bid.id}>
+                  <small>Bid created by: <b>{bid.user.username}</b></small><br />
+                  <br />
+                  <p>I am willing to make this shipment for: <b>{bid.bid}€</b></p>
+                  
+                  <button className="deleteButton  btn btn-sm text-danger " onClick={() => handleDeleteBid(bid)}><b>X</b></button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingTwo">
+            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              Comments
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div className="accordion-body">
+              <form onSubmit={handleNewComment} className="mb-3">
+                <textarea
+                  name="text"
+                  className="form-control mb-2"
+                  placeholder="Add Comment..."
+                />
+                <button type="submit" className="btn btn-sm btn-primary">
+                  Comment
+                </button>
+              </form>
+
+              {offer.comments.map((comment) => (
+                <div className="bidBox mb-4 border-bottom py-2" key={comment.id}>
+                  <small>Comment by: <b>{comment.user.username}</b></small><br />
+                  <br />
+                  <p>{comment.text}</p>
+                  <button className="deleteButton  btn btn-sm text-danger " onClick={() => handleDeleteComment(comment)}><b>X</b></button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <h5>Bids</h5>
 
       <form onSubmit={handleNewBid} className="mb-3">
         <input
@@ -124,9 +189,9 @@ function OfferDetail() {
           
           <button className="deleteButton  btn btn-sm text-danger " onClick={() => handleDeleteBid(bid)}><b>X</b></button>
         </div>
-      ))}
+      ))} */}
 
-      <h5>Comments</h5>
+      {/* <h5>Comments</h5>
 
       <form onSubmit={handleNewComment} className="mb-3">
         <textarea
@@ -146,7 +211,7 @@ function OfferDetail() {
           <p>{comment.text}</p>
           <button className="deleteButton  btn btn-sm text-danger " onClick={() => handleDeleteComment(comment)}><b>X</b></button>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
