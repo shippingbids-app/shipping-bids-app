@@ -48,6 +48,10 @@ export function userLogout() {
   return http.delete("/logout")
 }
 
+export function offerRegister(data) {
+  return http.post("/offers/create", data)
+}
+
 export function createOfferComment(offerId, data) {
   return http.post(`/offers/${offerId}/comments`, data)
 }

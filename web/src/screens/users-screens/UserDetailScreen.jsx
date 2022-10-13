@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { getUserProfile } from "../../services/offer-user-service";
 
 function UserDetailScreen() {
   const [user, setUser] = useState(null);
   const { id } = useParams();
   const services = user?.services[0];
-  const offers = user?.offers
+  const offers = user?.offers;
 
   useEffect(() => {
     getUserProfile(id)
@@ -29,17 +30,6 @@ function UserDetailScreen() {
 
   return (
     <div>
-      {/* <h1>User name: {user?.username}</h1>
-      <img src={user?.image} alt={user?.username} />
-      <h1>Email: {user?.email}</h1>
-      <h1>Phone Number: {user?.phoneNumber}</h1>
-      <h1>Offers:</h1>
-      {user?.offers.map((offer) => (
-        <h1 key={offer.id}>Offer: {offer.title}</h1>
-      ))}
-      {user?.services.map((service) => (
-        <h1 key={service.id}>Service available on: {service.address}</h1>
-      ))} */}
       <div className="card">
         <img src={user?.image} className="card-img-top" alt={user?.username} />
         <div className="card-body">
@@ -53,17 +43,22 @@ function UserDetailScreen() {
             Phone number: <b>{user?.phoneNumber}</b>
           </h5>
         </div>
-        {offers.length !== 0 ? (<ul className="list-group pt-3">
-          <h3 className="ms-5 text-primary">Offers: </h3>
-          {user?.offers.map((offer) => (
-            <li className="list-group-item" key={offer.id}>
-              Offer: {offer.title}
-            </li>
-          ))}
-        </ul>) : (
+        {offers ? (
+          <ul className="list-group pt-3">
+            <h3 className="ms-5 text-primary">Offers: </h3>
+            {user?.offers.map((offer) => (
+              <li className="list-group-item" key={offer.id}>
+                Offer:
+                <Link to={`/offers/${offer.id}`} className="ms-2 text-dark">
+                  {offer.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
           <></>
         )}
-        
+
         {services ? (
           <ul className="list-group pt-3">
             <h3 className="ms-5 text-primary">Services: </h3>

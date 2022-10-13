@@ -29,12 +29,11 @@ const offerSchema = new Schema(
       ],
       default: [],
     },
-    // author: {
-    //   ref: "User",
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    // },
-    author: String,
+    author: {
+      ref: "User",
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
     originAddress: {
       type: String,
       // required: true,
