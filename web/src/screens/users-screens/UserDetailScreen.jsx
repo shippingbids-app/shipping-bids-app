@@ -14,7 +14,6 @@ function UserDetailScreen() {
       .then((user) => setUser(user))
       .catch((error) => console.error(error));
   }, [id]);
-  console.log(user);
 
   if (!user) {
     return (

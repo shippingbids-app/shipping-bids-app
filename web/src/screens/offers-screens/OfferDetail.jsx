@@ -4,13 +4,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import * as offerService from "../../services/offer-user-service";
 import { AuthContext } from "../../contexts/AuthContext";
+import capacities from "../../data/capacities";
+import services from "../../data/services";
 
 function OfferDetail() {
   const [offer, setOffer] = useState(null);
   const { offerId } = useParams();
   const user = useContext(AuthContext);
-  console.log(offer);
-
+  const capacity = capacities.filter((cap) => cap.value === offer?.logisticsCapacity[0])
+  const capacityToShow = capacity[0]?.label
+  
+  const service = services.filter((serv) => serv.value === offer?.services[0])
+  const serviceToShow = service[0]?.label
+  
   useEffect(() => {
     offerService
       .getOffer(offerId)
@@ -21,12 +27,10 @@ function OfferDetail() {
   const handleNewComment = (event) => {
     event.preventDefault();
     const form = event.target;
-    console.log("comment " + form.text.value);
 
     offerService
       .createOfferComment(offerId, { text: form.text.value })
       .then((comment) => {
-        console.log(comment);
         offerService.getOffer(offerId).then((offer) => setOffer(offer));
         form.text.value = "";
       })
@@ -51,12 +55,10 @@ function OfferDetail() {
   const handleNewBid = (event) => {
     event.preventDefault();
     const form = event.target;
-    console.log("bid " + form.bid.value);
 
     offerService
       .createOfferBid(offerId, { bid: form.bid.value })
       .then((bid) => {
-        console.log(bid);
         offerService.getOffer(offerId).then((offer) => setOffer(offer));
         form.bid.value = "";
       })
@@ -74,7 +76,6 @@ function OfferDetail() {
       .deleteOfferBid(offerId, id)
       .then(() => {
         offerService.getOffer(offerId).then((offer) => setOffer(offer));
-        console.log("offer erased");
       })
       .catch((error) => console.error(error));
   };
@@ -97,13 +98,13 @@ function OfferDetail() {
       <h3>Ship from: {offer.originAddress}</h3>
       <h3>Ship to: {offer.destinationAddress}</h3>
       <h3>Initial price: {offer.initialPrice}€</h3>
-      <h3>Logisctics size: {offer.logisticsCapacity[0]}</h3>
-      <h3>Type of service: {offer.services[0]}</h3>
+      <h3>Logisctics size: {capacityToShow}</h3>
+      <h3>Type of service: {serviceToShow}</h3>
       <h3>Offer state: {offer.offerState[0]}</h3>
       <h3>OfferId: {offer.id}</h3>
       <h3>
         Expiration date:{" "}
-        {moment(offer.expirationDate).format("DD MMM YY, h:mm")}
+        {moment(offer.expirationDate).format("DD MMM YY, HH:mm")}
       </h3>
 
       <div

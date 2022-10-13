@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router";
-import Select from 'react-select';
+import Select from "react-select";
 import { offerRegister } from "../../services/offer-user-service";
-import capacities from "../../data/capacities"
+import capacities from "../../data/capacities";
+import services from "../../data/services";
 
 function OfferForm() {
   const navigation = useNavigate();
@@ -25,7 +26,7 @@ function OfferForm() {
       .catch((error) => {
         if (error.response?.data?.errors) {
           const { errors } = error.response.data;
-          console.log(errors);
+          console.error(errors);
           Object.keys(error.response.data.errors).forEach((error) => {
             setError(error, { message: errors[error].message });
           });
@@ -52,28 +53,100 @@ function OfferForm() {
             <div className="invalid-feedback">{errors.title.message}</div>
           )}
         </div>
-        <Controller 
-        name="logisticsCapacity"
-        control={control}
-        render={({ field: { onBlur, onChange, value } }) => (
-          <div className="input-group mb-1">
-            <span className="input-group-text"><i className='fa fa-pencil fa-fw'></i></span>
-            <Select className='form-control p-0' 
-              value={capacities.find((capacity) => capacity.value === value)} 
-              onChange={(capacities) => onChange(capacities.map(capacity => capacity.value))} 
-              onBlur={onBlur}
-              options={capacities}
-              styles={{
-                control: (base) => ({
-                  ...base,
-                  border: 0
-                })
-              }}/>
-            {errors.logisticsCapacity && (<div className="invalid-feedback">{errors.logisticsCapacity.message}</div>)}
-          </div>
-        )}
-      />
-
+        <Controller
+          name="logisticsCapacity"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <div className="input-group mb-1">
+              <span className="input-group-text">
+                <i className="fa fa-pencil fa-fw"></i>
+              </span>
+              <Select
+                className="form-control p-0"
+                value={capacities.find((capacity) => capacity.value === value)}
+                onChange={(v) => {
+                  onChange(v.value);
+                }}
+                onBlur={onBlur}
+                options={capacities}
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    border: 0,
+                  }),
+                }}
+              />
+              {errors.logisticsCapacity && (
+                <div className="invalid-feedback">
+                  {errors.logisticsCapacity.message}
+                </div>
+              )}
+            </div>
+          )}
+        />
+        <Controller
+          name="services"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <div className="input-group mb-1">
+              <span className="input-group-text">
+                <i className="fa fa-pencil fa-fw"></i>
+              </span>
+              <Select
+                className="form-control p-0"
+                value={services.find((service) => service.value === value)}
+                onChange={(s) => {
+                  onChange(s.value);
+                }}
+                onBlur={onBlur}
+                options={services}
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    border: 0,
+                  }),
+                }}
+              />
+              {errors.services && (
+                <div className="invalid-feedback">
+                  {errors.services.message}
+                </div>
+              )}
+            </div>
+          )}
+        />
+        <div className="input-group mb-1">
+          <span className="input-group-text">
+            <i className="fa fa-sticky-note fa-fw"></i>
+          </span>
+          <input
+            type="datetime-local"
+            className={`form-control ${errors.date ? "is-invalid" : ""}`}
+            placeholder="Offer date..."
+            {...register("expirationDate", {
+              required: "A date is required",
+            })}
+          />
+          {errors.date && (
+            <div className="invalid-feedback">{errors.date.message}</div>
+          )}
+        </div>
+        <div className="input-group mb-1">
+          <span className="input-group-text">
+            <i className="fa fa-sticky-note fa-fw"></i>
+          </span>
+          <input
+            type="number"
+            className={`form-control ${errors.title ? "is-invalid" : ""}`}
+            placeholder="Offer price..."
+            {...register("initialPrice", {
+              required: "A price is required",
+            })}
+          />
+          {errors.price && (
+            <div className="invalid-feedback">{errors.price.message}</div>
+          )}
+        </div>
 
         <div className="d-grid mt-3">
           <button className="btn btn-danger" type="submit" disabled={!isValid}>

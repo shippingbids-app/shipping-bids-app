@@ -13,7 +13,7 @@ function OfferCard({
   expirationDate,
 }) {
   const offerId = id;
-
+  
   return (
     <div className="card text-center my-2">
       <div className="card-header">{services[0]}</div>
@@ -28,7 +28,7 @@ function OfferCard({
         </Link>
       </div>
       <div className="card-footer text-muted">
-        {author} {moment({ expirationDate }).endOf("day").fromNow()}
+        {author?.username} {moment({ expirationDate }).endOf("day").fromNow()}
       </div>
     </div>
   );
