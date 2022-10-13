@@ -40,6 +40,7 @@ module.exports.list = (req, res, next) => {
   }
 
   Offer.find(criterial)
+    .populate("author", "username")
     .then((offers) => res.json(offers))
     .catch(next);
 };
