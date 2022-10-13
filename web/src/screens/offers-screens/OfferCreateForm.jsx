@@ -5,7 +5,7 @@ import OfferForm from '../../components/offer-form/OfferForm'
 function OfferCreateForm() {
   return (
     <>
-      <Section title="Register" icon="archive">
+      <Section title="Register an offer" icon="archive">
         <OfferForm />
       </Section>
     </>

@@ -92,7 +92,7 @@ function OfferDetail() {
   return (
     <div>
       <h3>Offer name: {offer.title}</h3>
-      <h3>Created by: {offer.author}</h3>
+      <h3>Created by: {offer?.author?.username}</h3>
       {/* Meter author.username cando creemos nós todo, nas offer de proba pétase */}
       <h3>Ship from: {offer.originAddress}</h3>
       <h3>Ship to: {offer.destinationAddress}</h3>
