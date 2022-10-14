@@ -90,7 +90,7 @@ function OfferForm() {
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
               <span className="input-group-text">
-                <i className="fa fa-pencil fa-fw"></i>
+                <i className="fa fa-building fa-fw"></i>
               </span>
               <Select
                 className="form-control p-0"
@@ -120,6 +120,44 @@ function OfferForm() {
             <i className="fa fa-sticky-note fa-fw"></i>
           </span>
           <input
+            type="text"
+            className={`form-control g-places-finder ${errors.originAddress ? "is-invalid" : ""}`}
+            placeholder="Origin address..."
+            {...register("originAddress", {
+              required: "Origin address is required",
+            })}
+          />
+          {errors.originAddress && (
+            <div className="invalid-feedback">{errors.originAddress.message}</div>
+          )}
+          <input type="hidden" name="lat" value="lat" />
+          <input type="hidden" name="lng" value="lng" />
+        </div>
+
+        <div className="input-group mb-1">
+          <span className="input-group-text">
+            <i className="fa fa-sticky-note fa-fw"></i>
+          </span>
+          <input
+            type="text"
+            className={`form-control g-places-finder ${errors.destinationAddress ? "is-invalid" : ""}`}
+            placeholder="Destination address..."
+            {...register("destinationAddress", {
+              required: "Destination address is required",
+            })}
+          />
+          {errors.destinationAddress && (
+            <div className="invalid-feedback">{errors.destinationAddress.message}</div>
+          )}
+          <input type="hidden" name="lat" value="lat" />
+          <input type="hidden" name="lng" value="lng" />
+        </div>
+
+        <div className="input-group mb-1">
+          <span className="input-group-text">
+            <i className="fa fa-calendar fa-fw"></i>
+          </span>
+          <input
             type="datetime-local"
             className={`form-control ${errors.date ? "is-invalid" : ""}`}
             placeholder="Offer date..."
@@ -133,7 +171,7 @@ function OfferForm() {
         </div>
         <div className="input-group mb-1">
           <span className="input-group-text">
-            <i className="fa fa-sticky-note fa-fw"></i>
+            <i className="fa fa-money fa-fw"></i>
           </span>
           <input
             type="number"
