@@ -67,3 +67,7 @@ export function createOfferBid(offerId, data) {
 export function deleteOfferBid(offerId, id) {
   return http.delete(`offers/${offerId}/bids/${id}`)
 }
+
+export function serviceRegister(data) {
+  return http.post("/services/create", data)
+}

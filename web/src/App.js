@@ -6,6 +6,7 @@ import {
   UserDetailScreen,
   OfferDetail,
   LoginScreen,
+  ServiceCreateFormScreen
 } from "./screens";
 import NavBar from "./components/ui/nav-bar/NavBar.jsx";
 import RegisterScreen from "./screens/users-screens/RegisterScreen";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/offers" element={<OfferListScreen />} />
           <Route path="/offers/create" element={<OfferCreateForm />}/>
           <Route path="/offers/:offerId" element={<OfferDetail />} />
+          <Route path="/services/create" element={<ServiceCreateFormScreen />}/>
           <Route path="/users/:id" element={<UserDetailScreen />} />
           <Route path="/map" element={<MapScreen />} />
         </Routes>

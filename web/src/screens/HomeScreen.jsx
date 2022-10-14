@@ -36,6 +36,11 @@ function HomeScreen() {
                 <button className="btn btn-outline-info btn-lg">Set an offer</button>
               </div>
             </Link>
+            <Link to={"/services/create"} className="text-decoration-none">
+              <div className="mt-5">
+                <button className="btn btn-outline-info btn-lg">Set an service</button>
+              </div>
+            </Link>
           </>
         )}
 
