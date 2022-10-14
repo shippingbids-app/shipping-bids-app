@@ -71,3 +71,7 @@ export function deleteOfferBid(offerId, id) {
 export function serviceRegister(data) {
   return http.post("/services/create", data)
 }
+
+export function serviceUpdate(data, serviceId) {
+  return http.patch(`/services/${serviceId}`, data)
+}

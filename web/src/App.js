@@ -6,11 +6,12 @@ import {
   UserDetailScreen,
   OfferDetail,
   LoginScreen,
-  ServiceCreateFormScreen
+  RegisterScreen,
+  ServiceCreateFormScreen,
+  OfferCreateForm,
+  ServiceUpdate,
 } from "./screens";
 import NavBar from "./components/ui/nav-bar/NavBar.jsx";
-import RegisterScreen from "./screens/users-screens/RegisterScreen";
-import OfferCreateForm from "./screens/offers-screens/OfferCreateForm";
 
 function App() {
   return (
@@ -23,9 +24,13 @@ function App() {
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/offers" element={<OfferListScreen />} />
-          <Route path="/offers/create" element={<OfferCreateForm />}/>
+          <Route path="/offers/create" element={<OfferCreateForm />} />
           <Route path="/offers/:offerId" element={<OfferDetail />} />
-          <Route path="/services/create" element={<ServiceCreateFormScreen />}/>
+          <Route
+            path="/services/create"
+            element={<ServiceCreateFormScreen />}
+          />
+          <Route path="/services/:serviceId" element={<ServiceUpdate />} />
           <Route path="/users/:id" element={<UserDetailScreen />} />
           <Route path="/map" element={<MapScreen />} />
         </Routes>

@@ -9,6 +9,8 @@ function UserDetailScreen() {
   const services = user?.services[0];
   const offers = user?.offers;
 
+  const serviceId = user?.services[0]?.id
+
   useEffect(() => {
     getUserProfile(id)
       .then((user) => setUser(user))
@@ -60,7 +62,12 @@ function UserDetailScreen() {
 
         {services ? (
           <ul className="list-group pt-3">
-            <h3 className="ms-5 text-primary">Services: </h3>
+            <div className="d-flex justify-content-between pb-3">
+              <h3 className="ms-5 text-primary">Services: </h3>
+              <Link to={`/services/${serviceId}`}>
+              <button className="btn btn-outline-primary btn-sm align-self-center me-3">*</button>
+              </Link>
+              </div>
             <li className="list-group-item">
               Service available on: <b>{services.address}</b>
             </li>

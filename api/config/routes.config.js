@@ -50,15 +50,15 @@ router.delete(
 
 router.post("/services/create", secure.isAuthenticated, service.create);
 router.get("/services", secure.isAuthenticated, service.list);
-router.get("/services/:id", secure.isAuthenticated, service.detail);
+router.get("/services/:serviceId", secure.isAuthenticated, service.detail);
 router.patch(
-  "/services/:id",
+  "/services/:serviceId",
   secure.isAuthenticated,
   servicesMid.isOwnedByUser,
   service.updateService
 );
 router.delete(
-  "/services/:id",
+  "/services/:serviceId",
   secure.isAuthenticated,
   servicesMid.isOwnedByUser,
   service.delete
