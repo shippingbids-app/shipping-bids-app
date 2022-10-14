@@ -2,8 +2,8 @@ const { Service } = require("../models");
 const createError = require("http-errors");
 
 module.exports.isOwnedByUser = (req, res, next) => {
-  const { id } = req.params;
-  Service.findById(id)
+  const { serviceId } = req.params;
+  Service.findById(serviceId)
     .then((service) => {
       if (service?.author == req.user?.id) {
         req.service = service;

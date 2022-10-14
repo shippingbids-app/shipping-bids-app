@@ -20,7 +20,7 @@ module.exports.detail = (req, res, next) => {
 };
 
 module.exports.updateService = (req, res, next) => {
-  Service.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Service.findByIdAndUpdate(req.params.serviceId, req.body, { new: true })
     .then((service) => res.json(service))
     .catch(next);
 };
