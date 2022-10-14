@@ -43,6 +43,9 @@ function UserDetailScreen() {
           <h5 className="card-title">
             Phone number: <b>{user?.phoneNumber}</b>
           </h5>
+          <h5 className="card-title">
+            Rating: <b>5 <i className="fa fa-star text-warning"></i></b>
+          </h5>
         </div>
         {offers ? (
           <ul className="list-group pt-3">
