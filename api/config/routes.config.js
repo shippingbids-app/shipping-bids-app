@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const parser = require("../config/multer.config")
 const { auth, offer, service, comment, bid } = require("../controllers/");
 const {
   secure,

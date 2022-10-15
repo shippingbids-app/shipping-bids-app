@@ -12,13 +12,14 @@ import {
   ServiceUpdate,
 } from "./screens";
 import NavBar from "./components/ui/nav-bar/NavBar.jsx";
+import BottomNavbar from "./components/ui/bottom-navigation/BottomNavbar";
 
 function App() {
   return (
     <>
       <NavBar />
 
-      <div className="container my-5">
+      <div className="container my-5 pb-2">
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
@@ -35,6 +36,8 @@ function App() {
           <Route path="/map" element={<MapScreen />} />
         </Routes>
       </div>
+
+      <BottomNavbar />
     </>
   );
 }
