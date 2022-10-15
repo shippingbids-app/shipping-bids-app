@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Select from 'react-select';
 import { serviceRegister } from '../../services/offer-user-service';
 import { capacities, vehicles} from "../../data";
+import { AuthContext } from '../../contexts/AuthContext';
+import { AlertContext } from '../../contexts/AlertContext';
 
 function ServiceForm() {
   const navigation = useNavigate()
+  const user = useContext(AuthContext);
+  const alertText = useContext(AlertContext);
 
   const {
     register,
@@ -17,6 +21,12 @@ function ServiceForm() {
   } = useForm({ mode: "all" });
 
   const handleServiceRegister = (data) => {
+    console.log(user)
+    // debugger
+    if (user.user.services.length > 0) {
+      alertText.setAlert("This user already has a service");
+    }
+
     serviceRegister(data)
       .then((data) => {
         console.log("service created")

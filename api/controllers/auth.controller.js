@@ -39,6 +39,7 @@ module.exports.authenticate = (req, res, next) => {
 
   const { email, password } = req.body;
   User.findOne({ email })
+  .populate("services")
     .then((user) => {
       if (!user) {
         invalidAuhtError();

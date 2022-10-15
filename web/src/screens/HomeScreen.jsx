@@ -9,7 +9,7 @@ function HomeScreen() {
   useEffect(() => {
     setUser(value);
   }, [value]);
-
+  console.log(user)
   if (!user) return <></>;
   return (
     <div>
