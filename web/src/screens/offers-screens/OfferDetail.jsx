@@ -32,6 +32,7 @@ function OfferDetail() {
       .createOfferComment(offerId, { text: form.text.value })
       .then((comment) => {
         offerService.getOffer(offerId).then((offer) => setOffer(offer));
+        // debugger
         form.text.value = "";
       })
       .catch((error) => console.error(error));
@@ -41,6 +42,9 @@ function OfferDetail() {
     const id = comment.id;
 
     if (comment.user.id !== user.user.id) {
+      console.log(comment.user.id)
+      console.log(user.user.id)
+      debugger
       alert("You can't delete this Comment");
     }
 
@@ -89,7 +93,7 @@ function OfferDetail() {
       </>
     );
   }
-console.log(offer)
+console.log(offer.comments)
   return (
     <div>
       <h3>Offer name: {offer.title}</h3>
@@ -214,6 +218,7 @@ console.log(offer)
                       <b className="ms-2">{comment.user.username}</b>
                     </Link>
                       <b className="ms-2">{comment.user.rating} <i className="fa fa-star text-warning"></i></b>
+                      <h5 className="ms-2">{comment.user.id}</h5>
                   </small>
                   <br />
                   <br />
