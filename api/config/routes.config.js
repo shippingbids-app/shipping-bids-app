@@ -48,7 +48,7 @@ router.delete(
 );
 
 
-router.post("/services/create", secure.isAuthenticated, service.create);
+router.post("/services/create", secure.isAuthenticated,servicesMid.isUnique, service.create);
 router.get("/services", secure.isAuthenticated, service.list);
 router.get("/services/:serviceId", secure.isAuthenticated, service.detail);
 router.patch(

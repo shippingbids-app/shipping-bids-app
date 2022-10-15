@@ -16,3 +16,14 @@ module.exports.isOwnedByUser = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.isUnique = (req, res, next) => {
+  Service.findOne({ author: req.user?.id})
+    .then((service) => {
+      if (!service) {
+        next()
+      } else  {
+        next(createError(403, "You already have a service created"))
+      }
+    })
+}
