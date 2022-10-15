@@ -27,7 +27,7 @@ router.delete(
   offer.delete
 );
 
-router.post("/offers/:offerId/bids", secure.isAuthenticated, offersMid.authorCanNotMakeBids, bid.create);
+router.post("/offers/:offerId/bids", secure.isAuthenticated, offersMid.authorCanNotMakeBids, offersMid.bidIsValidPrice, bid.create);
 router.delete(
   "/offers/:offerId/bids/:id",
   secure.isAuthenticated,

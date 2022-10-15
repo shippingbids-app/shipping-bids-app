@@ -33,3 +33,16 @@ module.exports.authorCanNotMakeBids = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.bidIsValidPrice = (req, res, next) => {
+  const { offerId } = req.params;
+  Offer.findById(offerId)
+    .then((offer) => {
+      if (offer?.initialPrice > req.body.bid) {
+        next();
+      } else {
+        next(createError(400, "The bid can't be over the initial price"))
+      }
+    })
+    .catch(next);
+};
