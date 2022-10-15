@@ -15,9 +15,9 @@ function RegisterForm() {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
-  const handleRegister = (data) => {
+  const handleRegister = (user) => {
 
-    userRegister(data)
+    userRegister(user)
       .then((data) => {
         console.log(`${data.username} created`);
         navigation("/offers");
@@ -105,7 +105,7 @@ function RegisterForm() {
             <i className="fa fa-file-image-o fa-fw"></i>
           </span>
           <input
-            type="text"
+            type="file"
             className={`form-control ${errors.image ? "is-invalid" : ""}`}
             placeholder="Profile image..."
             {...register("image")}

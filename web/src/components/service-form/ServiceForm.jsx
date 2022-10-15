@@ -21,8 +21,7 @@ function ServiceForm() {
   } = useForm({ mode: "all" });
 
   const handleServiceRegister = (data) => {
-    console.log(user)
-    // debugger
+    
     if (user.user.services.length > 0) {
       alertText.setAlert("This user already has a service");
     }

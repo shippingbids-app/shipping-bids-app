@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const parser = require("../config/multer.config")
+const upload = require("../config/multer.config")
 const { auth, offer, service, comment, bid } = require("../controllers/");
 const {
   secure,
@@ -10,7 +10,7 @@ const {
   bidMid,
 } = require("../middlewares");
 
-router.post("/register", auth.register);
+router.post("/register", upload.single("image"), auth.register);
 router.post("/authenticate", auth.authenticate);
 router.get("/profile", auth.profile)
 router.get("/users", secure.isAuthenticated, auth.listUsers);

@@ -40,7 +40,14 @@ export function getUserProfile(id) {
   return http.get(`/users/${id}`)
 }
 
-export function userRegister(data) {
+export function userRegister(user) {
+  user.image = user.image[0]
+  const data = new FormData()
+
+  Object.keys(user).forEach(key => {
+    data.append(key, user[key])
+  })
+
   return http.post("/register", data)
 }
 
