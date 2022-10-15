@@ -28,7 +28,7 @@ function UserDetailScreen() {
       </>
     );
   }
-
+console.log(user)
   return (
     <div>
       <div className="card">
@@ -44,7 +44,7 @@ function UserDetailScreen() {
             Phone number: <b>{user?.phoneNumber}</b>
           </h5>
           <h5 className="card-title">
-            Rating: <b>5 <i className="fa fa-star text-warning"></i></b>
+            Rating: <b>{user?.rating} <i className="fa fa-star text-warning"></i></b>
           </h5>
         </div>
         {offers ? (

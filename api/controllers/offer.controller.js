@@ -52,14 +52,14 @@ module.exports.detail = (req, res, next) => {
       path: "bids",
       populate: {
         path: "user",
-        select: "username vehicles id"
+        select: "username vehicles id rating"
       },
     })
     .populate({
       path: "comments",
       populate: {
         path: "user",
-        select: "username email id"
+        select: "username email id rating"
       },
     })
     .then((offer) => {

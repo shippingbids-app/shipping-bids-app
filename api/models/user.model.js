@@ -61,6 +61,7 @@ const userSchema = new Schema(
         message: "Phone number is invalid"
       }
     },
+    rating: Number
   },
   {
     timestamps: true,

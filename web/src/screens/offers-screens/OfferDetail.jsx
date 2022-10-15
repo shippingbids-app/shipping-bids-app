@@ -89,7 +89,7 @@ function OfferDetail() {
       </>
     );
   }
-
+console.log(offer)
   return (
     <div>
       <h3>Offer name: {offer.title}</h3>
@@ -150,6 +150,7 @@ function OfferDetail() {
                     <Link to={`/users/${bid.user.id}`} className="text-dark">
                       <b className="ms-2">{bid.user.username}</b>
                     </Link>
+                      <b className="ms-2">{bid.user.rating} <i className="fa fa-star text-warning"></i></b>
                   </small>
                   <br />
                   <br />
@@ -212,6 +213,7 @@ function OfferDetail() {
                     >
                       <b className="ms-2">{comment.user.username}</b>
                     </Link>
+                      <b className="ms-2">{comment.user.rating} <i className="fa fa-star text-warning"></i></b>
                   </small>
                   <br />
                   <br />
