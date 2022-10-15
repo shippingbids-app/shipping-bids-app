@@ -6,17 +6,22 @@ import * as offerService from "../../services/offer-user-service";
 import { AuthContext } from "../../contexts/AuthContext";
 import capacities from "../../data/capacities";
 import services from "../../data/services";
+import { AlertContext } from "../../contexts/AlertContext";
 
 function OfferDetail() {
   const [offer, setOffer] = useState(null);
   const { offerId } = useParams();
   const user = useContext(AuthContext);
-  const capacity = capacities.filter((cap) => cap.value === offer?.logisticsCapacity[0])
-  const capacityToShow = capacity[0]?.label
-  
-  const service = services.filter((serv) => serv.value === offer?.services[0])
-  const serviceToShow = service[0]?.label
-  
+  const alertText = useContext(AlertContext);
+  const capacity = capacities.filter(
+    (cap) => cap.value === offer?.logisticsCapacity[0]
+  );
+  const capacityToShow = capacity[0]?.label;
+
+  const service = services.filter((serv) => serv.value === offer?.services[0]);
+  const serviceToShow = service[0]?.label;
+
+
   useEffect(() => {
     offerService
       .getOffer(offerId)
@@ -44,8 +49,13 @@ function OfferDetail() {
     if (comment.user.id !== user.user.id) {
       // console.log(comment.user.id)
       // console.log(user.user.id)
-      debugger
-      alert("You can't delete this Comment");
+      // debugger
+      // alert("You can't delete this Comment");
+      alertText.setAlertBanner(true);
+      setTimeout(() => {
+        alertText.setAlertBanner(false);
+      }, 3000);
+      // alert(alertText.alert);
     }
 
     offerService
@@ -73,7 +83,7 @@ function OfferDetail() {
     const id = bid.id;
 
     if (bid.user.id !== user.user.id) {
-      alert("You can't delete this Bid");
+      alert(alertText.alert);
     }
 
     offerService
@@ -93,12 +103,11 @@ function OfferDetail() {
       </>
     );
   }
-console.log(offer.comments)
+  console.log(offer.comments);
   return (
     <div>
       <h3>Offer name: {offer.title}</h3>
       <h3>Created by: {offer?.author?.username}</h3>
-      {/* Meter author.username cando creemos nós todo, nas offer de proba pétase */}
       <h3>Ship from: {offer.originAddress}</h3>
       <h3>Ship to: {offer.destinationAddress}</h3>
       <h3>Initial price: {offer.initialPrice}€</h3>
@@ -154,7 +163,10 @@ console.log(offer.comments)
                     <Link to={`/users/${bid.user.id}`} className="text-dark">
                       <b className="ms-2">{bid.user.username}</b>
                     </Link>
-                      <b className="ms-2">{bid.user.rating} <i className="fa fa-star text-warning"></i></b>
+                    <b className="ms-2">
+                      {bid.user.rating}{" "}
+                      <i className="fa fa-star text-warning"></i>
+                    </b>
                   </small>
                   <br />
                   <br />
@@ -203,7 +215,7 @@ console.log(offer.comments)
                   Comment
                 </button>
               </form>
-
+                {alertText.alert}
               {offer.comments.map((comment) => (
                 <div
                   className="bidBox mb-4 border-bottom py-2"
@@ -217,8 +229,11 @@ console.log(offer.comments)
                     >
                       <b className="ms-2">{comment.user.username}</b>
                     </Link>
-                      <b className="ms-2">{comment.user.rating} <i className="fa fa-star text-warning"></i></b>
-                      {/* <h5 className="ms-2">{comment.user.id}</h5> */}
+                    <b className="ms-2">
+                      {comment.user.rating}{" "}
+                      <i className="fa fa-star text-warning"></i>
+                    </b>
+                    {/* <h5 className="ms-2">{comment.user.id}</h5> */}
                   </small>
                   <br />
                   <br />
