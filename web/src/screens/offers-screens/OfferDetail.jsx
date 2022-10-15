@@ -47,15 +47,7 @@ function OfferDetail() {
     const id = comment.id;
 
     if (comment.user.id !== user.user.id) {
-      // console.log(comment.user.id)
-      // console.log(user.user.id)
-      // debugger
-      // alert("You can't delete this Comment");
-      alertText.setAlertBanner(true);
-      setTimeout(() => {
-        alertText.setAlertBanner(false);
-      }, 3000);
-      // alert(alertText.alert);
+      alertText.setAlert("You can't delete this comment");
     }
 
     offerService
@@ -70,20 +62,24 @@ function OfferDetail() {
     event.preventDefault();
     const form = event.target;
 
+    if (offer.initialPrice < form.bid.value) {
+      alertText.setAlert("Bids must be lower than the initial price");
+    }
+
     offerService
       .createOfferBid(offerId, { bid: form.bid.value })
-      .then((bid) => {
-        offerService.getOffer(offerId).then((offer) => setOffer(offer));
-        form.bid.value = "";
-      })
-      .catch((error) => console.error(error));
+        .then((bid) => {
+          offerService.getOffer(offerId).then((offer) => setOffer(offer));
+          form.bid.value = "";
+        })
+        .catch((error) => console.error(error));
   };
 
   const handleDeleteBid = (bid) => {
     const id = bid.id;
 
     if (bid.user.id !== user.user.id) {
-      alert(alertText.alert);
+      alertText.setAlert("You can't delete this bid");
     }
 
     offerService
@@ -215,7 +211,6 @@ function OfferDetail() {
                   Comment
                 </button>
               </form>
-                {alertText.alert}
               {offer.comments.map((comment) => (
                 <div
                   className="bidBox mb-4 border-bottom py-2"

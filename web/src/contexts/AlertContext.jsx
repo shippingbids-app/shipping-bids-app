@@ -1,26 +1,31 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const AlertContext = createContext();
-
+let timeOut
 function AlertContextProvider({ children }) {
-  const [alert, setAlert] = useState("socorro");
+  const [alert, setAlert] = useState(null);
 
-  const [alertBanner, setAlertBanner] = useState(false);
+  const value = { setAlert };
 
-  const value = { alert, setAlert, alertBanner, setAlertBanner };
+  useEffect(() => {
+    clearTimeout(timeOut)
+    timeOut = setTimeout(() => {
+      setAlert(null);
+    }, 3000);
+  }, [alert])
+  
+
   return (
     <AlertContext.Provider value={value}>
-      {alert && (<div>
-                {alertBanner && (
-                  <span>
-                    <h1 className="text-danger text-center">
-                      {alert}
-                    </h1>
-                  </span>)}
-                  
-                  <div>{children}</div>
-                
-              </div>)}
+      {
+        <div>
+          {alert && (
+            <div className="alert alert-danger fixed-top text-center">{alert}</div>
+          )}
+
+          <div>{children}</div>
+        </div>
+      }
     </AlertContext.Provider>
   );
 }
