@@ -42,8 +42,8 @@ function OfferDetail() {
     const id = comment.id;
 
     if (comment.user.id !== user.user.id) {
-      console.log(comment.user.id)
-      console.log(user.user.id)
+      // console.log(comment.user.id)
+      // console.log(user.user.id)
       debugger
       alert("You can't delete this Comment");
     }
@@ -218,7 +218,7 @@ console.log(offer.comments)
                       <b className="ms-2">{comment.user.username}</b>
                     </Link>
                       <b className="ms-2">{comment.user.rating} <i className="fa fa-star text-warning"></i></b>
-                      <h5 className="ms-2">{comment.user.id}</h5>
+                      {/* <h5 className="ms-2">{comment.user.id}</h5> */}
                   </small>
                   <br />
                   <br />
