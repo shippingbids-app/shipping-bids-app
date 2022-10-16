@@ -28,7 +28,7 @@ function UserDetailScreen() {
       </>
     );
   }
-  console.log(user);
+
   return (
     <div>
       <div className="card">
@@ -49,11 +49,6 @@ function UserDetailScreen() {
               {user?.rating} <i className="fa fa-star text-warning"></i>
             </b>
           </h5>
-          <Link to={`/services/${serviceId}`}>
-            <button className="btn btn-outline-primary btn-sm me-3">
-              UPDATE
-            </button>
-          </Link>
         </div>
 
         {offers ? (

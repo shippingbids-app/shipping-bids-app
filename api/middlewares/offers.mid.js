@@ -23,7 +23,6 @@ module.exports.authorCanNotMakeBids = (req, res, next) => {
     .then((offer) => {
       if (offer?.author != req.user?.id) {
         req.offer = offer;
-        console.log(offer);
         next();
       } else if (offer) {
         next(createError(403, "You're not authorized to do this"));

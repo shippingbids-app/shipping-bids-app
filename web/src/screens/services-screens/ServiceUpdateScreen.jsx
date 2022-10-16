@@ -5,7 +5,7 @@ import ServiceUpdate from "../../components/service-update/SeviceUpdate"
 function ServiceUpdateScreen() {
   return (
     <>
-    <Section title="Update service" icon="truck">
+    <Section title="Update your services" icon="truck">
       <ServiceUpdate />
     </Section>
     </>

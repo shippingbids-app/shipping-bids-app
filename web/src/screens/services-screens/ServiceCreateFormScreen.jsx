@@ -5,7 +5,7 @@ import Section from "../../components/section/Section";
 function ServiceCreateFormScreen() {
   return (
     <>
-      <Section title="Services form" icon="truck">
+      <Section title="Your available services" icon="truck">
         <ServiceForm />
       </Section>
     </>
