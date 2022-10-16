@@ -1,6 +1,6 @@
 import React from 'react'
 import Section from '../../components/section/Section'
-import ServiceUpdate from "../../components/service-form/SeviceUpdate"
+import ServiceUpdate from "../../components/service-update/SeviceUpdate"
 
 function ServiceUpdateScreen() {
   return (

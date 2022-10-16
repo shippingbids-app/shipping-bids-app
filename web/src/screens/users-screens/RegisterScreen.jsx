@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterForm from "../../components/register-form/RegisterForm";
+import RegisterForm from "../../components/users/register-form/RegisterForm";
 import Section from "../../components/section/Section";
 
 function RegisterScreen() {

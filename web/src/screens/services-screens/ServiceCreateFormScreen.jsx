@@ -1,6 +1,6 @@
-import React from 'react'
-import ServiceForm from '../../components/service-form/ServiceForm'
-import Section from "../../components/section/Section"
+import React from "react";
+import ServiceForm from "../../components/ship-services/service-form/ServiceForm";
+import Section from "../../components/section/Section";
 
 function ServiceCreateFormScreen() {
   return (
@@ -9,7 +9,7 @@ function ServiceCreateFormScreen() {
         <ServiceForm />
       </Section>
     </>
-  )
+  );
 }
 
-export default ServiceCreateFormScreen
+export default ServiceCreateFormScreen;

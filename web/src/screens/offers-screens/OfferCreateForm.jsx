@@ -1,6 +1,6 @@
 import React from 'react'
 import Section from '../../components/section/Section'
-import OfferForm from '../../components/offer-form/OfferForm'
+import OfferForm from '../../components/offers/offer-form/OfferForm'
 
 function OfferCreateForm() {
   return (

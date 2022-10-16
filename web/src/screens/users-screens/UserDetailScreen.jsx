@@ -9,7 +9,7 @@ function UserDetailScreen() {
   const services = user?.services[0];
   const offers = user?.offers;
 
-  const serviceId = user?.services[0]?.id
+  const serviceId = user?.services[0]?.id;
 
   useEffect(() => {
     getUserProfile(id)
@@ -28,7 +28,7 @@ function UserDetailScreen() {
       </>
     );
   }
-console.log(user)
+  console.log(user);
   return (
     <div>
       <div className="card">
@@ -44,9 +44,18 @@ console.log(user)
             Phone number: <b>{user?.phoneNumber}</b>
           </h5>
           <h5 className="card-title">
-            Rating: <b>{user?.rating} <i className="fa fa-star text-warning"></i></b>
+            Rating:
+            <b>
+              {user?.rating} <i className="fa fa-star text-warning"></i>
+            </b>
           </h5>
+          <Link to={`/services/${serviceId}`}>
+            <button className="btn btn-outline-primary btn-sm me-3">
+              UPDATE
+            </button>
+          </Link>
         </div>
+
         {offers ? (
           <ul className="list-group pt-3">
             <h3 className="ms-5 text-primary">Offers: </h3>
@@ -68,9 +77,11 @@ console.log(user)
             <div className="d-flex justify-content-between pb-3">
               <h3 className="ms-5 text-primary">Services: </h3>
               <Link to={`/services/${serviceId}`}>
-              <button className="btn btn-outline-primary btn-sm align-self-center me-3">UPDATE</button>
+                <button className="btn btn-outline-primary btn-sm align-self-center me-3">
+                  UPDATE
+                </button>
               </Link>
-              </div>
+            </div>
             <li className="list-group-item">
               Service available on: <b>{services.address}</b>
             </li>

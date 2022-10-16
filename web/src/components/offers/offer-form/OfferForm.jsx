@@ -2,9 +2,9 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Select from "react-select";
-import { offerRegister } from "../../services/offer-user-service";
-import capacities from "../../data/capacities";
-import services from "../../data/services";
+import { offerRegister } from "../../../services/offer-user-service";
+import capacities from "../../../data/capacities";
+import services from "../../../data/services";
 
 function OfferForm() {
   const navigation = useNavigate();

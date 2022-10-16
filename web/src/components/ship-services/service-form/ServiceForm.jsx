@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
-import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
-import Select from 'react-select';
-import { serviceRegister } from '../../services/offer-user-service';
-import { capacities, vehicles} from "../../data";
-import { AuthContext } from '../../contexts/AuthContext';
-import { AlertContext } from '../../contexts/AlertContext';
+import React, { useContext } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import Select from "react-select";
+import { serviceRegister } from "../../../services/offer-user-service";
+import { capacities, vehicles } from "../../../data";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { AlertContext } from "../../../contexts/AlertContext";
 
 function ServiceForm() {
-  const navigation = useNavigate()
+  const navigation = useNavigate();
   const user = useContext(AuthContext);
   const alertText = useContext(AlertContext);
 
@@ -21,31 +21,30 @@ function ServiceForm() {
   } = useForm({ mode: "all" });
 
   const handleServiceRegister = (data) => {
-    
     if (user.user?.services?.length > 0) {
       alertText.setAlert("This user already has a service");
     }
 
     serviceRegister(data)
       .then((data) => {
-        console.log("service created")
-        navigation(`/users/${data.author}`)
+        console.log("service created");
+        navigation(`/users/${data.author}`);
       })
       .catch((error) => {
         if (error.response?.data?.errors) {
-          const { errors } = error.response.data
-          console.error(errors)
+          const { errors } = error.response.data;
+          console.error(errors);
           Object.keys(error.response.data.errors).forEach((error) => {
-            setError(error, { message: errors[error].message })
-          })
+            setError(error, { message: errors[error].message });
+          });
         }
-      })
-  }
+      });
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit(handleServiceRegister)}>
-      <Controller
+        <Controller
           name="logisticsCapacity"
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
@@ -56,7 +55,9 @@ function ServiceForm() {
               <Select
                 className="form-control p-0"
                 value={capacities.find((capacity) => capacity.value === value)}
-                onChange={(capacities) => onChange(capacities.map(capacity => capacity.value))}
+                onChange={(capacities) =>
+                  onChange(capacities.map((capacity) => capacity.value))
+                }
                 isMulti
                 onBlur={onBlur}
                 options={capacities}
@@ -88,7 +89,9 @@ function ServiceForm() {
               <Select
                 className="form-control p-0"
                 value={vehicles.find((vehicle) => vehicle.value === value)}
-                onChange={(vehicles) => onChange(vehicles.map(vehicle => vehicle.value))}
+                onChange={(vehicles) =>
+                  onChange(vehicles.map((vehicle) => vehicle.value))
+                }
                 isMulti
                 onBlur={onBlur}
                 options={vehicles}
@@ -115,7 +118,9 @@ function ServiceForm() {
           </span>
           <input
             type="text"
-            className={`form-control g-places-finder ${errors.address ? "is-invalid" : ""}`}
+            className={`form-control g-places-finder ${
+              errors.address ? "is-invalid" : ""
+            }`}
             placeholder="Origin address..."
             {...register("address", {
               required: "Address is required",
@@ -135,7 +140,7 @@ function ServiceForm() {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default ServiceForm
+export default ServiceForm;

@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { userRegister } from "../../services/offer-user-service";
+import { userRegister } from "../../../services/offer-user-service";
 
 function RegisterForm() {
   const navigation = useNavigate();

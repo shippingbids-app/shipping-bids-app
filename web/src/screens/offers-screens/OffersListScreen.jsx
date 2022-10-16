@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import OfferCard from "../../components/offer-card/OfferCard";
+import OfferCard from "../../components/offers/offer-card/OfferCard";
 import * as offerService from "../../services/offer-user-service";
 
 function OffersListScreen() {
