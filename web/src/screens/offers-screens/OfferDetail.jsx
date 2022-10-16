@@ -1,7 +1,7 @@
 import "./OfferDetail.css";
 import moment from "moment/moment";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as offerService from "../../services/offer-user-service";
 import { AuthContext } from "../../contexts/AuthContext";
 import capacities from "../../data/capacities";
@@ -21,6 +21,7 @@ function OfferDetail() {
   const service = services.filter((serv) => serv.value === offer?.services[0]);
   const serviceToShow = service[0]?.label;
 
+  const navigation = useNavigate();
 
   useEffect(() => {
     offerService
@@ -28,6 +29,22 @@ function OfferDetail() {
       .then((offer) => setOffer(offer))
       .catch((error) => console.error(error));
   }, [offerId]);
+
+  const handleDeleteOffer = (offer) => {
+    const offerId = offer.id;
+
+    if (offer.author?.id !== user.user?.id) {
+      alertText.setAlert("You can't delete this offer");
+    } else {
+      offerService
+        .offerDelete(offerId)
+        .then(() => {
+          console.log("offer deleted");
+          navigation("/offers");
+        })
+        .catch((error) => console.error(error));
+    }
+  };
 
   const handleNewComment = (event) => {
     event.preventDefault();
@@ -68,11 +85,11 @@ function OfferDetail() {
 
     offerService
       .createOfferBid(offerId, { bid: form.bid.value })
-        .then((bid) => {
-          offerService.getOffer(offerId).then((offer) => setOffer(offer));
-          form.bid.value = "";
-        })
-        .catch((error) => console.error(error));
+      .then((bid) => {
+        offerService.getOffer(offerId).then((offer) => setOffer(offer));
+        form.bid.value = "";
+      })
+      .catch((error) => console.error(error));
   };
 
   const handleDeleteBid = (bid) => {
@@ -99,22 +116,33 @@ function OfferDetail() {
       </>
     );
   }
-  console.log(offer.comments);
+
   return (
     <div>
-      <h3>Offer name: {offer.title}</h3>
-      <h3>Created by: {offer?.author?.username}</h3>
-      <h3>Ship from: {offer.originAddress}</h3>
-      <h3>Ship to: {offer.destinationAddress}</h3>
-      <h3>Initial price: {offer.initialPrice}€</h3>
-      <h3>Logisctics size: {capacityToShow}</h3>
-      <h3>Type of service: {serviceToShow}</h3>
-      <h3>Offer state: {offer.offerState[0]}</h3>
-      <h3>OfferId: {offer.id}</h3>
-      <h3>
-        Expiration date:{" "}
-        {moment(offer.expirationDate).format("DD MMM YY, HH:mm")}
-      </h3>
+      <div className="card">
+        <div className="card-body">
+          <button
+            className="deleteButton btn btn-sm text-danger "
+            onClick={() => handleDeleteOffer(offer)}
+          >
+            <b>X</b>
+          </button>
+
+          <h3>Offer name: {offer.title}</h3>
+          <h3>Created by: {offer?.author?.username}</h3>
+          <h3>Ship from: {offer.originAddress}</h3>
+          <h3>Ship to: {offer.destinationAddress}</h3>
+          <h3>Initial price: {offer.initialPrice}€</h3>
+          <h3>Logisctics size: {capacityToShow}</h3>
+          <h3>Type of service: {serviceToShow}</h3>
+          <h3>Offer state: {offer.offerState[0]}</h3>
+          <h3>OfferId: {offer.id}</h3>
+          <h3>
+            Expiration date:{" "}
+            {moment(offer.expirationDate).format("DD MMM YY, HH:mm")}
+          </h3>
+        </div>
+      </div>
 
       <div
         className="accordion accordion-flush mt-5"

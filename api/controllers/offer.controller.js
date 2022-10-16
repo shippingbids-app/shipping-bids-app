@@ -73,7 +73,7 @@ module.exports.detail = (req, res, next) => {
 };
 
 module.exports.delete = (req, res, next) => {
-  Offer.findByIdAndDelete(req.params.id)
+  Offer.findByIdAndDelete(req.params.offerId)
     .then(() => res.status(204).send())
     .catch(next);
 };

@@ -2,8 +2,8 @@ const { Offer } = require("../models");
 const createError = require("http-errors");
 
 module.exports.isOwnedByUser = (req, res, next) => {
-  const { id } = req.params;
-  Offer.findById(id)
+  const { offerId } = req.params;
+  Offer.findById(offerId)
     .then((offer) => {
       if (offer?.author == req.user?.id) {
         req.offer = offer;

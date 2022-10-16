@@ -59,6 +59,10 @@ export function offerRegister(data) {
   return http.post("/offers/create", data)
 }
 
+export function offerDelete(offerId) {
+  return http.delete(`/offers/${offerId}`)
+}
+
 export function createOfferComment(offerId, data) {
   return http.post(`/offers/${offerId}/comments`, data)
 }
