@@ -22,7 +22,7 @@ function ServiceForm() {
 
   const handleServiceRegister = (data) => {
     
-    if (user.user.services.length > 0) {
+    if (user.user?.services?.length > 0) {
       alertText.setAlert("This user already has a service");
     }
 

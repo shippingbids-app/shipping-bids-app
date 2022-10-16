@@ -1,4 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 export const AlertContext = createContext();
 let timeOut
@@ -20,7 +22,9 @@ function AlertContextProvider({ children }) {
       {
         <div>
           {alert && (
-            <div className="alert alert-danger fixed-top text-center">{alert}</div>
+            <Stack sx={{ width: "100%" }} spacing={2}>
+              <Alert variant="filled" severity="error">{alert}</Alert>
+            </Stack>
           )}
 
           <div>{children}</div>

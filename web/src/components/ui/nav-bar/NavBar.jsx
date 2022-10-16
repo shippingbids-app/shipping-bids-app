@@ -8,13 +8,13 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { userLogout } from "../../../services/offer-user-service";
+import "./NavBar.css"
 
 const pages = ["New Offer", "Create Service"];
 const settings = ["Profile", "Logout"];
@@ -63,14 +63,14 @@ const NavBar = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+              fontFamily: "verdana",
+              fontWeight: 550,
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            SHIPPING BIDS
           </Typography>
 
           {user.user && (
@@ -149,18 +149,6 @@ const NavBar = () => {
           >
             SHIPPING BIDS
           </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
 
           {user.user && (
             <Box sx={{ flexGrow: 0 }}>

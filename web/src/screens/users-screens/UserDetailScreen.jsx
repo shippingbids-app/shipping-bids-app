@@ -68,7 +68,7 @@ console.log(user)
             <div className="d-flex justify-content-between pb-3">
               <h3 className="ms-5 text-primary">Services: </h3>
               <Link to={`/services/${serviceId}`}>
-              <button className="btn btn-outline-primary btn-sm align-self-center me-3">*</button>
+              <button className="btn btn-outline-primary btn-sm align-self-center me-3">UPDATE</button>
               </Link>
               </div>
             <li className="list-group-item">
