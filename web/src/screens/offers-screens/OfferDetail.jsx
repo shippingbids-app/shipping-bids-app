@@ -46,7 +46,7 @@ function OfferDetail() {
   const handleDeleteComment = (comment) => {
     const id = comment.id;
 
-    if (comment.user.id !== user.user.id) {
+    if (comment.user?.id !== user.user.id) {
       alertText.setAlert("You can't delete this comment");
     }
 
@@ -78,7 +78,7 @@ function OfferDetail() {
   const handleDeleteBid = (bid) => {
     const id = bid.id;
 
-    if (bid.user.id !== user.user.id) {
+    if (bid.user?.id !== user.user.id) {
       alertText.setAlert("You can't delete this bid");
     }
 
@@ -156,11 +156,11 @@ function OfferDetail() {
                 <div className="bidBox mb-4 border py-2 ps-2" key={bid.id}>
                   <small>
                     Bid created by:
-                    <Link to={`/users/${bid.user.id}`} className="text-dark">
-                      <b className="ms-2">{bid.user.username}</b>
+                    <Link to={`/users/${bid?.user?.id}`} className="text-dark">
+                      <b className="ms-2">{bid?.user?.username}</b>
                     </Link>
                     <b className="ms-2">
-                      {bid.user.rating}{" "}
+                      {bid?.user?.rating}{" "}
                       <i className="fa fa-star text-warning"></i>
                     </b>
                   </small>
@@ -219,13 +219,13 @@ function OfferDetail() {
                   <small>
                     Comment by:
                     <Link
-                      to={`/users/${comment.user.id}`}
+                      to={`/users/${comment?.user?.id}`}
                       className="text-dark"
                     >
-                      <b className="ms-2">{comment.user.username}</b>
+                      <b className="ms-2">{comment?.user?.username}</b>
                     </Link>
                     <b className="ms-2">
-                      {comment.user.rating}{" "}
+                      {comment?.user?.rating}{" "}
                       <i className="fa fa-star text-warning"></i>
                     </b>
                     {/* <h5 className="ms-2">{comment.user.id}</h5> */}

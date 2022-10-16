@@ -7,7 +7,7 @@ module.exports.isComentOwnedByUser = (req, res, next) => {
   Comment.findById(id)
     .then((comment) => {
       if (comment) {
-        if (comment.user._id == req.user.id) {
+        if (comment.user._id == req.user.id || req.user.role === "admin") {
           return Comment.findByIdAndDelete(comment.id)
             .then(() => res.status(204).send())
         } else {
