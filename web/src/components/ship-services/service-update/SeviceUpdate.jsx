@@ -2,8 +2,8 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams} from "react-router";
 import Select from "react-select";
-import { serviceUpdate } from "../../services/offer-user-service";
-import { capacities, vehicles } from "../../data";
+import { serviceUpdate } from "../../../services/offer-user-service";
+import { capacities, vehicles } from "../../../data";
 
 function SeviceUpdate() {
   const navigation = useNavigate();
