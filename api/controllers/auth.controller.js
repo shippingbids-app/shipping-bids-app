@@ -80,9 +80,19 @@ module.exports.userProfile = (req, res, next) => {
 };
 
 module.exports.userProfileUpdate = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  debugger
+  const userData = ({ email, phoneNumber, image, password} = req.body)
+  Object.assign(req.user, userData)
+
+  req.user
+    .save()
     .then((user) => res.json(user))
-    .catch(next);
+    .catch(error => next(error))
+
+
+  // User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  //   .then((user) => res.json(user))
+  //   .catch(next);
 };
 
 module.exports.logout = (req, res, next) => {

@@ -42,8 +42,16 @@ export function userRegister(user) {
 
   return http.post("/register", data)
 }
+export function userUpdateProfile(id, user) {
+  if (user.image) {
+    user.image = user.image[0]
+  }
+  const data = new FormData()
 
-export function userUpdateProfile(id, data) {
+  Object.keys(user).forEach(key => {
+    data.append(key, user[key])
+  })
+  
   return http.patch(`/users/${id}/profile`, data)
 }
 

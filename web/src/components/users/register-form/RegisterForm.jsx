@@ -16,7 +16,6 @@ function RegisterForm() {
   } = useForm({ mode: "all" });
 
   const handleRegister = (user) => {
-
     userRegister(user)
       .then((data) => {
         console.log(`${data.username} created`);
@@ -32,6 +31,15 @@ function RegisterForm() {
         }
       });
   };
+
+  const showPassword = () => {
+    let x = document.getElementById("password");
+        if (x?.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+  }
 
   return (
     <div>
@@ -73,6 +81,7 @@ function RegisterForm() {
             <i className="fa fa-lock fa-fw"></i>
           </span>
           <input
+            id="password"
             type="password"
             className={`form-control ${errors.password ? "is-invalid" : ""}`}
             placeholder="Password with at least 8 chars"
@@ -80,6 +89,7 @@ function RegisterForm() {
               required: "Password is required",
             })}
           />
+          <span class="input-group-text"><i class="fa fa-eye fa-fw" onClick={() => showPassword()}></i></span>
           {errors.password && (
             <div className="invalid-feedback">{errors.password.message}</div>
           )}
