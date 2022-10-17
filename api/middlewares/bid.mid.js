@@ -2,9 +2,9 @@ const { Offer, Bid } = require("../models");
 const createError = require("http-errors");
 
 module.exports.bidIsOwnedByUser = (req, res, next) => {
-  const { id } = req.params; //cambio de bidId a só id en liñas 5 e 7
-
-  Bid.findById(id) //Middleware cambio a andDelete. Borra a bid da DB, non do React. Ao refrescar non apaerece xa, pero sigue dando o erro en consola
+  const { id } = req.params; 
+  
+  Bid.findById(id)
     .then((bid) => {
       if (bid) {
         console.log("biduser: " + bid.user._id)

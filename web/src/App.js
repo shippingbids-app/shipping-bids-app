@@ -13,6 +13,7 @@ import {
 } from "./screens";
 import NavBar from "./components/ui/nav-bar/NavBar.jsx";
 import BottomNavbar from "./components/ui/bottom-navigation/BottomNavbar";
+import UserUpdateScreen from "./screens/users-screens/UserUpdateScreen";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           />
           <Route path="/services/:serviceId" element={<ServiceUpdate />} />
           <Route path="/users/:id" element={<UserDetailScreen />} />
+          <Route path="/users/:id/profile" element={<UserUpdateScreen />} />
           <Route path="/map" element={<MapScreen />} />
         </Routes>
       </div>

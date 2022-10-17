@@ -59,7 +59,7 @@ function OfferForm() {
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
               <span className="input-group-text">
-                <i className="fa fa-pencil fa-fw"></i>
+                <i className="fa fa-archive fa-fw"></i>
               </span>
               <Select
                 className="form-control p-0"
@@ -117,7 +117,7 @@ function OfferForm() {
         />
         <div className="input-group mb-1">
           <span className="input-group-text">
-            <i className="fa fa-sticky-note fa-fw"></i>
+            <i className="fa fa-location-arrow fa-fw"></i>
           </span>
           <input
             type="text"
@@ -136,7 +136,7 @@ function OfferForm() {
 
         <div className="input-group mb-1">
           <span className="input-group-text">
-            <i className="fa fa-sticky-note fa-fw"></i>
+            <i className="fa fa-map-marker fa-fw"></i>
           </span>
           <input
             type="text"
@@ -171,7 +171,7 @@ function OfferForm() {
         </div>
         <div className="input-group mb-1">
           <span className="input-group-text">
-            <i className="fa fa-money fa-fw"></i>
+            <i className="fa fa-eur fa-fw"></i>
           </span>
           <input
             type="number"

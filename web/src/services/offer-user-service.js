@@ -44,7 +44,7 @@ export function userRegister(user) {
 }
 
 export function userUpdateProfile(id, data) {
-  return http.patch(`/users/${id}`, data)
+  return http.patch(`/users/${id}/profile`, data)
 }
 
 export function userLogout() {

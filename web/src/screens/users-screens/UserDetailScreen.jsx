@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getUserProfile } from "../../services/offer-user-service";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function UserDetailScreen() {
   const [user, setUser] = useState(null);
   const { id } = useParams();
   const services = user?.services[0];
   const offers = user?.offers;
+
+  const userLogged = useContext(AuthContext);
 
   const serviceId = user?.services[0]?.id;
 
@@ -49,6 +52,17 @@ function UserDetailScreen() {
               {user?.rating} <i className="fa fa-star text-warning"></i>
             </b>
           </h5>
+
+          {userLogged?.user?.id === user?.id && (
+            <div className=" d-flex justify-content-center">
+            <Link to={`/users/${id}/profile`}>
+              <button className="btn btn-outline-primary btn-sm mx-auto me-3">
+                UPDATE
+              </button>
+            </Link>
+          </div>
+          )}
+          
         </div>
 
         {offers ? (
