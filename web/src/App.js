@@ -20,7 +20,7 @@ function App() {
     <>
       <NavBar />
 
-      <div className="container my-5 pb-2">
+      <div className="container mb-5 pb-2">
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />

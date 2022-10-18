@@ -123,15 +123,15 @@ function OfferForm() {
             type="text"
             className={`form-control g-places-finder ${errors.originAddress ? "is-invalid" : ""}`}
             placeholder="Origin address..."
-            {...register("originAddress", {
+            {...register("origin", {
               required: "Origin address is required",
             })}
           />
           {errors.originAddress && (
             <div className="invalid-feedback">{errors.originAddress.message}</div>
           )}
-          <input type="hidden" name="lat" value="lat" />
-          <input type="hidden" name="lng" value="lng" />
+          <input type="hidden" name="lat" value={`${origin.lat}`} />
+          <input type="hidden" name="lng" value={`${origin.lng}`} />
         </div>
 
         <div className="input-group mb-1">
@@ -142,7 +142,7 @@ function OfferForm() {
             type="text"
             className={`form-control g-places-finder ${errors.destinationAddress ? "is-invalid" : ""}`}
             placeholder="Destination address..."
-            {...register("destinationAddress", {
+            {...register("destination", {
               required: "Destination address is required",
             })}
           />

@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import OfferMap from "../components/offers/offer-map/OfferMap";
 
 function MapScreen() {
   return (
-    <div>MapScreen</div>
-  )
+    <div className="mt-3">
+      <OfferMap />
+    </div>
+  );
 }
 
-export default MapScreen
+export default MapScreen;
