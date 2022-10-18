@@ -87,8 +87,8 @@ const offerSchema = new Schema(
         delete ret.__v;
         ret.id = ret._id;
         delete ret._id;
-        // ret.origin = ret.origin?.coordinates.reverse() || [];
-        // ret.destination = ret.destination?.coordinates.reverse() || [];
+        ret.origin = ret.origin?.coordinates.reverse() || [];
+        ret.destination = ret.destination?.coordinates.reverse() || [];
 
         return ret;
       },
