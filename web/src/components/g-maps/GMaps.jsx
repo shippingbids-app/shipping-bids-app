@@ -11,12 +11,12 @@ function Map({ center, zoom, markers }) {
       center,
       zoom,
     });
-    /* markers.forEach */ new window.google.maps.Marker({
+    markers.forEach((marker) => new window.google.maps.Marker({
       position: center,
       map,
-      title: "Hello World!",
-    });
-  }, [center, zoom]);
+      title: marker.title,
+    })) 
+  }, [center, zoom, markers]);
 
   return <div ref={ref} id="map" style={{ height: "580px"}}/>;
 }
