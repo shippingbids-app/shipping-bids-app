@@ -4,11 +4,11 @@ import Section from "../../components/section/Section";
 
 function RegisterScreen() {
   return (
-    <>
+    <div className="mt-3">
       <Section title="Register" icon="pencil-square-o">
-        <RegisterForm />
+        <RegisterForm/>
       </Section>
-    </>
+    </div>
   );
 }
 

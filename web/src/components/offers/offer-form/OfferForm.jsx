@@ -35,7 +35,7 @@ function OfferForm() {
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit(handleOfferRegister)}>
         <div className="input-group mb-1">
           <span className="input-group-text">
@@ -192,7 +192,7 @@ function OfferForm() {
           </button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
 

@@ -4,7 +4,7 @@ import Section from "../../components/section/Section"
 
 function UserUpdateScreen() {
   return (
-    <div>
+    <div className="mt-3">
       <Section title="Update your personal data" icon="check-circle">
         <UpdateUser />
       </Section>

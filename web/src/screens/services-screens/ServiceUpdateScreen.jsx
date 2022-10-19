@@ -4,11 +4,11 @@ import ServiceUpdate from "../../components/ship-services/service-update/SeviceU
 
 function ServiceUpdateScreen() {
   return (
-    <>
+    <div className='mt-3'>
     <Section title="Update your services" icon="truck">
       <ServiceUpdate />
     </Section>
-    </>
+    </div>
   )
 }
 

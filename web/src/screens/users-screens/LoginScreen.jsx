@@ -36,7 +36,7 @@ function LoginScreen() {
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <Section title="Login" icon="sign-in">
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="input-group mb-1">

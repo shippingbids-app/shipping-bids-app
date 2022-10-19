@@ -33,7 +33,7 @@ function UserDetailScreen() {
   }
 
   return (
-    <div>
+    <div className="mt-2">
       <div className="card">
         <img src={user?.image} className="card-img-top" alt={user?.username} />
         <div className="card-body">
