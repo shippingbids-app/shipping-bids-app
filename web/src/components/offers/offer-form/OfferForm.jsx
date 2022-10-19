@@ -5,9 +5,19 @@ import Select from "react-select";
 import { offerRegister } from "../../../services/offer-user-service";
 import capacities from "../../../data/capacities";
 import services from "../../../data/services";
+import AutoComplete, { usePlacesWidget } from "react-google-autocomplete";
+
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY || "";
 
 function OfferForm() {
   const navigation = useNavigate();
+
+  const { originRef } = usePlacesWidget({
+    apiKey: GOOGLE_API_KEY,
+    onPlaceSelected: (place) => {
+      console.log(place);
+    },
+  });
 
   const {
     register,
@@ -18,6 +28,14 @@ function OfferForm() {
   } = useForm({ mode: "all" });
 
   const handleOfferRegister = (data) => {
+    data = {
+      ...data,
+      ...data.origin,
+      ...data.destination
+    }
+
+    console.log(data)
+
     offerRegister(data)
       .then((data) => {
         console.log(`${data.title} created`);
@@ -115,44 +133,50 @@ function OfferForm() {
             </div>
           )}
         />
-        <div className="input-group mb-1">
-          <span className="input-group-text">
-            <i className="fa fa-location-arrow fa-fw"></i>
-          </span>
-          <input
-            type="text"
-            className={`form-control g-places-finder ${errors.originAddress ? "is-invalid" : ""}`}
-            placeholder="Origin address..."
-            {...register("origin", {
-              required: "Origin address is required",
-            })}
-          />
-          {errors.originAddress && (
-            <div className="invalid-feedback">{errors.originAddress.message}</div>
+        <Controller
+          name="origin"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <div className="input-group mb-1">
+              <span className="input-group-text">
+                <i className="fa fa-location-arrow fa-fw"></i>
+              </span>
+              <AutoComplete
+                apiKey={GOOGLE_API_KEY}
+                onPlaceSelected={(place) => {
+                  const origin = {
+                    originAddress: place.formatted_address,
+                    origin: [place.geometry.location.lat(), place.geometry.location.lng()],
+                  };
+                  onChange(origin)
+                }}
+                className="form-control"
+              />
+            </div>
           )}
-          <input type="hidden" name="lat" value={`${origin.lat}`} />
-          <input type="hidden" name="lng" value={`${origin.lng}`} />
-        </div>
-
-        <div className="input-group mb-1">
-          <span className="input-group-text">
-            <i className="fa fa-map-marker fa-fw"></i>
-          </span>
-          <input
-            type="text"
-            className={`form-control g-places-finder ${errors.destinationAddress ? "is-invalid" : ""}`}
-            placeholder="Destination address..."
-            {...register("destination", {
-              required: "Destination address is required",
-            })}
-          />
-          {errors.destinationAddress && (
-            <div className="invalid-feedback">{errors.destinationAddress.message}</div>
+        />
+         <Controller
+          name="destination"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <div className="input-group mb-1">
+              <span className="input-group-text">
+                <i className="fa fa-map-marker fa-fw"></i>
+              </span>
+              <AutoComplete
+                apiKey={GOOGLE_API_KEY}
+                onPlaceSelected={(place) => {
+                  const destination = {
+                    destinationAddress: place.formatted_address,
+                    destination: [place.geometry.location.lat(), place.geometry.location.lng()],
+                  };
+                  onChange(destination)
+                }}
+                className="form-control"
+              />
+            </div>
           )}
-          <input type="hidden" name="lat" value="lat" />
-          <input type="hidden" name="lng" value="lng" />
-        </div>
-
+        />
         <div className="input-group mb-1">
           <span className="input-group-text">
             <i className="fa fa-calendar fa-fw"></i>

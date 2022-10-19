@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper";
 
+
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY || "";
 
 function Map({ center, zoom, markers }) {
@@ -12,7 +13,7 @@ function Map({ center, zoom, markers }) {
       zoom,
     });
     markers.forEach((marker) => new window.google.maps.Marker({
-      position: center,
+      position: marker.position,
       map,
       title: marker.title,
     })) 
