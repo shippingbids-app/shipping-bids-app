@@ -14,8 +14,12 @@ import {
 import NavBar from "./components/ui/nav-bar/NavBar.jsx";
 import BottomNavbar from "./components/ui/bottom-navigation/BottomNavbar";
 import UserUpdateScreen from "./screens/users-screens/UserUpdateScreen";
+import { AuthContext } from "./contexts/AuthContext";
+import { useContext } from "react";
 
 function App() {
+  const user = useContext(AuthContext);
+
   return (
     <>
       <NavBar />
@@ -35,7 +39,7 @@ function App() {
           <Route path="/services/:serviceId" element={<ServiceUpdate />} />
           <Route path="/users/:id" element={<UserDetailScreen />} />
           <Route path="/users/:id/profile" element={<UserUpdateScreen />} />
-          <Route path="/map" element={<MapScreen />} />
+          <Route path="/map" element={user.user ? <MapScreen /> : <LoginScreen />} />
         </Routes>
       </div>
 
