@@ -7,8 +7,7 @@ module.exports.bidIsOwnedByUser = (req, res, next) => {
   Bid.findById(id)
     .then((bid) => {
       if (bid) {
-        console.log("biduser: " + bid.user._id)
-        console.log("user: " + req.user.id)
+
         if (bid.user._id == req.user.id || req.user.role === "admin") {
            return Bid.findByIdAndDelete(bid.id)
             .then(() => res.status(204).send())          
