@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import capacities from "../../data/capacities";
 import services from "../../data/services";
 import { AlertContext } from "../../contexts/AlertContext";
+import Avatar from "@mui/material/Avatar";
 
 function OfferDetail() {
   const [offer, setOffer] = useState(null);
@@ -54,7 +55,6 @@ function OfferDetail() {
       .createOfferComment(offerId, { text: form.text.value })
       .then((comment) => {
         offerService.getOffer(offerId).then((offer) => setOffer(offer));
-        // debugger
         form.text.value = "";
       })
       .catch((error) => console.error(error));
@@ -119,7 +119,7 @@ function OfferDetail() {
 
   return (
     <div>
-      <div className="card">
+      <div className="card mt-3">
         <div className="card-body">
           <button
             className="deleteButton btn btn-sm text-danger "
@@ -128,19 +128,49 @@ function OfferDetail() {
             <b>X</b>
           </button>
 
-          <h3>Offer name: {offer.title}</h3>
-          <h3>Created by: {offer?.author?.username}</h3>
-          <h3>Ship from: {offer.originAddress}</h3>
-          <h3>Ship to: {offer.destinationAddress}</h3>
-          <h3>Initial price: {offer.initialPrice}€</h3>
-          <h3>Logisctics size: {capacityToShow}</h3>
-          <h3>Type of service: {serviceToShow}</h3>
-          <h3>Offer state: {offer.offerState[0]}</h3>
-          <h3>OfferId: {offer.id}</h3>
-          <h3>
-            Expiration date:{" "}
+          <h1 className="text-center py-1 fw-bold text-decoration-underline">
+            {offer.title}
+          </h1>
+          <Link
+            to={`/users/${offer?.author?.id}`}
+            className="text-decoration-none text-dark"
+          >
+            <div className="d-flex flex-row justify-content-center align-items-center m-3">
+              <Avatar
+                alt={offer?.author?.username}
+                src={offer?.author?.image}
+                variant="rounded"
+              />
+              <h3 className="ms-2">{offer?.author?.username}</h3>
+            </div>
+          </Link>
+          <br />
+          <h3 className="fw-bold text-center">
+            <i className="fa fa-eur me-2"></i>Initial price:{" "}
+            {offer.initialPrice}€
+          </h3>
+          <br />
+          
+          <h2>
+            <i className="fa fa-location-arrow me-2 text-primary"></i>From:{" "}
+            {offer.originAddress}
+          </h2>
+          <h2>
+            <i className="fa fa-map-marker me-2 text-danger"></i>To:{" "}
+            {offer.destinationAddress}
+          </h2>
+          <br />
+          <h3 className="fw-bold text-center">
+            <i className="fa fa-calendar fa-sm me-2"></i>Date:{" "}
             {moment(offer.expirationDate).format("DD MMM YY, HH:mm")}
           </h3>
+          <br />
+          <h5>
+            <i className="fa fa-archive me-2"></i> {capacityToShow}
+          </h5>
+          <h5>
+            <i className="fa fa-building me-2"></i> {serviceToShow}
+          </h5>
         </div>
       </div>
 
@@ -158,7 +188,7 @@ function OfferDetail() {
               aria-expanded="false"
               aria-controls="flush-collapseOne"
             >
-              Bids
+              <b>BIDS</b>
             </button>
           </h2>
           <div
@@ -180,32 +210,44 @@ function OfferDetail() {
                 </button>
               </form>
 
-              {offer.bids.map((bid) => (
-                <div className="bidBox mb-4 border py-2 ps-2" key={bid.id}>
-                  <small>
-                    Bid created by:
-                    <Link to={`/users/${bid?.user?.id}`} className="text-dark">
-                      <b className="ms-2">{bid?.user?.username}</b>
-                    </Link>
-                    <b className="ms-2">
-                      {bid?.user?.rating}{" "}
-                      <i className="fa fa-star text-warning"></i>
-                    </b>
-                  </small>
-                  <br />
-                  <br />
-                  <p>
-                    I am willing to make this shipment for: <b>{bid.bid}€</b>
-                  </p>
+              {offer.bids
+                .sort((a, b) => {
+                  return a.bid - b.bid;
+                })
+                .map((bid) => (
+                  <div className="bidBox mb-4 border py-2 ps-2" key={bid.id}>
+                    <small>
+                      <Link
+                        to={`/users/${bid?.user?.id}`}
+                        className="text-dark"
+                      >
+                        <div className="d-flex flex-row">
+                        <Avatar
+                          alt={bid?.user?.username}
+                          src={bid?.user?.image}
+                        />
+                        <b className="ms-2 align-self-center">
+                          {bid?.user?.username}
+                        </b>
+                        <b className="ms-2 align-self-center">
+                          {bid?.user?.rating}
+                          <i className="fa fa-star text-warning"></i>
+                        </b>
+                      </div>
+                      </Link>
+                    </small>
+                    <p>
+                      I am willing to make this shipment for: <b className="text-success">{bid.bid}€</b>
+                    </p>
 
-                  <button
-                    className="deleteButton  btn btn-sm text-danger "
-                    onClick={() => handleDeleteBid(bid)}
-                  >
-                    <b>X</b>
-                  </button>
-                </div>
-              ))}
+                    <button
+                      className="deleteButton btn btn-sm text-danger"
+                      onClick={() => handleDeleteBid(bid)}
+                    >
+                      <b>X</b>
+                    </button>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -219,7 +261,7 @@ function OfferDetail() {
               aria-expanded="false"
               aria-controls="flush-collapseTwo"
             >
-              Comments
+              <b>COMMENTS</b>
             </button>
           </h2>
           <div
@@ -245,20 +287,25 @@ function OfferDetail() {
                   key={comment.id}
                 >
                   <small>
-                    Comment by:
                     <Link
                       to={`/users/${comment?.user?.id}`}
                       className="text-dark"
                     >
-                      <b className="ms-2">{comment?.user?.username}</b>
+                      <div className="d-flex flex-row">
+                        <Avatar
+                          alt={comment?.user?.username}
+                          src={comment?.user?.image}
+                        />
+                        <b className="ms-2 align-self-center">
+                          {comment?.user?.username}
+                        </b>
+                        <b className="ms-2 align-self-center">
+                          {comment?.user?.rating}
+                          <i className="fa fa-star text-warning"></i>
+                        </b>
+                      </div>
                     </Link>
-                    <b className="ms-2">
-                      {comment?.user?.rating}{" "}
-                      <i className="fa fa-star text-warning"></i>
-                    </b>
-                    {/* <h5 className="ms-2">{comment.user.id}</h5> */}
                   </small>
-                  <br />
                   <br />
                   <p>{comment.text}</p>
                   <button

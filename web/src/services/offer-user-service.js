@@ -69,7 +69,6 @@ export function getOffer(offerId) {
 }
 
 export function offerRegister(data) {
-  debugger
   return http.post("/offers/create", data)
 }
 

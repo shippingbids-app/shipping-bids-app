@@ -9,14 +9,14 @@ module.exports.create = (req, res, next) => {
   if (origin) {
     offer.origin = {
       type: "Point",
-      coordinates: origin.reverse()
-    }
+      coordinates: origin.reverse(),
+    };
   }
   if (destination) {
     offer.destination = {
       type: "Point",
-      coordinates: destination.reverse()
-    }
+      coordinates: destination.reverse(),
+    };
   }
 
   Offer.create(offer)
@@ -34,7 +34,7 @@ module.exports.list = (req, res, next) => {
           type: "Point",
           coordinates: [lng, lat],
         },
-        $maxDistance: 50000, 
+        $maxDistance: 50000,
       },
     };
   }
@@ -47,19 +47,19 @@ module.exports.list = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   Offer.findById(req.params.offerId)
-    .populate("author", "username")
+    .populate("author", "username image id")
     .populate({
       path: "bids",
       populate: {
         path: "user",
-        select: "username vehicles id rating"
+        select: "username image vehicles id rating",
       },
     })
     .populate({
       path: "comments",
       populate: {
         path: "user",
-        select: "username email id rating"
+        select: "username image id rating",
       },
     })
     .then((offer) => {
