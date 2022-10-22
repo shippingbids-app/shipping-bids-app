@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { userRegister } from "../../../services/offer-user-service";
 
-
 function RegisterForm() {
   const navigation = useNavigate();
 
@@ -35,12 +34,12 @@ function RegisterForm() {
 
   const showPassword = () => {
     let x = document.getElementById("password");
-        if (x?.type === "password") {
-          x.type = "text";
-        } else {
-          x.type = "password";
-        }
-  }
+    if (x?.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  };
 
   return (
     <div>
@@ -90,7 +89,9 @@ function RegisterForm() {
               required: "Password is required",
             })}
           />
-          <span class="input-group-text"><i class="fa fa-eye fa-fw" onClick={() => showPassword()}></i></span>
+          <span className="input-group-text">
+            <i className="fa fa-eye fa-fw" onClick={() => showPassword()}></i>
+          </span>
           {errors.password && (
             <div className="invalid-feedback">{errors.password.message}</div>
           )}

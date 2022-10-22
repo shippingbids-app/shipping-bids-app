@@ -1,11 +1,11 @@
 const services = [
-  { value: "restaurant", label: "Restaurant" },
-  { value: "fresh-food", label: "Fresh Food" },
-  { value: "store-parts", label: "Store Parts" },
-  { value: "household-appliance", label: "Household Appliance"},
-  { value: "shop", label: "Shop" },
-  { value: "fragile-merchandise", label: "Fragile Merchandise" },
-  { value: "others", label: "Others" },
+  { value: "restaurant", label: "Restaurant", icon: "cutlery" },
+  { value: "fresh-food", label: "Fresh Food", icon: "lemon-o" },
+  { value: "store-parts", label: "Store Parts", icon: "wrench" },
+  { value: "household-appliance", label: "Household Appliance", icon: "home"},
+  { value: "shop", label: "Shop", icon: "shopping-basket" },
+  { value: "fragile-merchandise", label: "Fragile Merchandise", icon: "glass" },
+  { value: "others", label: "Others", icon: "superpowers fa-spin" },
 ];
 
 module.exports = services;

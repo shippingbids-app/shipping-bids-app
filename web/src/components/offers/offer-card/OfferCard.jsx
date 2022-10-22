@@ -22,16 +22,17 @@ function OfferCard({
 
   const service = servicesType.filter((serv) => serv.value === services[0]);
   const serviceToShow = service[0]?.label;
+  const serviceIcon = service[0]?.icon
 
   return (
     <div className="card text-center my-2">
-      <div className="card-header">{serviceToShow}</div>
+      <div className="card-header bg-info bg-gradient">
+      <i className={`fa fa-${serviceIcon}`}></i> {serviceToShow}</div>
       <div className="card-body">
-        <h5 className="card-title">{title}</h5>
+        <h3 className="card-title">{title}</h3>
         <p className="card-text">
-          Ship {capacityToShow} box, from {originAddress} to{" "}
-          {destinationAddress}
-        </p>
+          <u>{capacityToShow}</u> from <b>{originAddress}</b> to{" "}
+          <b>{destinationAddress}</b>        </p>
         <Link to={`/offers/${offerId}`} className="btn btn-primary">
           Go bid!
         </Link>

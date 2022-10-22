@@ -1,17 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
-import { AuthContext } from "../../../contexts/AuthContext";
 import { userUpdateProfile } from "../../../services/offer-user-service";
-import ImageInput from "./ImageInput";
-import PasswordInput from "./PasswordInput";
 
 function UpdateUser() {
   const navigation = useNavigate();
   const { id } = useParams();
-  const user = useContext(AuthContext)
-  const [pwrd, setPwrd] = useState(false)
-  const [img, setImg] = useState(false)
 
   const {
     register,
@@ -21,7 +15,22 @@ function UpdateUser() {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
+  const showPassword = () => {
+    let x = document.getElementById("password");
+    if (x?.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  };
+
   const handleUpdateProfile = (user) => {
+    Object.keys(user).forEach((k) => {
+      if (user[k] === "") {
+        delete user[k];
+      }
+    });
+
     userUpdateProfile(id, user)
       .then((data) => {
         console.log(`${data.username} updated`);
@@ -40,53 +49,81 @@ function UpdateUser() {
 
   return (
     <>
-    <div>
-      <form onSubmit={handleSubmit(handleUpdateProfile)}>
-        <div className="input-group mb-1">
-          <span className="input-group-text">
-            <i className="fa fa-envelope-o fa-fw"></i>
-          </span>
-          <input
-            type="email"
-            className={`form-control ${errors.email ? "is-invalid" : ""}`}
-            placeholder="Email..."
-            {...register("email")}
-          />
-          {errors.email && (
-            <div className="invalid-feedback">{errors.email.message}</div>
-          )}
-        </div>
-        <div className="input-group mb-1">
-          <span className="input-group-text">
-            <i className="fa fa-phone fa-fw"></i>
-          </span>
-          <input
-            type="number"
-            className={`form-control ${errors.phoneNumber ? "is-invalid" : ""}`}
-            placeholder="Phone Number..."
-            {...register("phoneNumber")}
-          />
-          {errors.phoneNumber && (
-            <div className="invalid-feedback">{errors.phoneNumber.message}</div>
-          )}
-        </div>
-        {pwrd && <PasswordInput register={register} errors={errors} />}
-        {img && <ImageInput register={register} errors={errors} />}
-        <div className="d-flex flex-row justify-content-evenly mt-2">          
-          <button className="btn btn-danger btn-sm" type="submit" onClick={() => setPwrd(!pwrd) }>
-            Update Password
-          </button>
-          <button className="btn btn-info btn-sm" type="submit" onClick={() => setImg(!img)}>
-            Update profile image
-          </button>  
-        </div>
-        <div className="d-grid mt-3">         
-          <button className="btn btn-info" type="submit" disabled={!isValid}>
-            Update
-          </button>
-        </div>
-      </form>
-    </div>
+      <div>
+        <form onSubmit={handleSubmit(handleUpdateProfile)}>
+          <div className="input-group mb-1">
+            <span className="input-group-text">
+              <i className="fa fa-envelope-o fa-fw"></i>
+            </span>
+            <input
+              type="email"
+              className={`form-control ${errors.email ? "is-invalid" : ""}`}
+              placeholder="Email..."
+              {...register("email")}
+            />
+            {errors.email && (
+              <div className="invalid-feedback">{errors.email.message}</div>
+            )}
+          </div>
+          <div className="input-group mb-1">
+            <span className="input-group-text">
+              <i className="fa fa-phone fa-fw"></i>
+            </span>
+            <input
+              type="number"
+              className={`form-control ${
+                errors.phoneNumber ? "is-invalid" : ""
+              }`}
+              placeholder="Phone Number..."
+              {...register("phoneNumber")}
+            />
+            {errors.phoneNumber && (
+              <div className="invalid-feedback">
+                {errors.phoneNumber.message}
+              </div>
+            )}
+          </div>
+          <div className="input-group mb-1">
+            <span className="input-group-text">
+              <i className="fa fa-lock fa-fw"></i>
+            </span>
+            <input
+              id="password"
+              type="password"
+              className={`form-control ${errors.password ? "is-invalid" : ""}`}
+              placeholder="Password with at least 8 chars"
+              {...register("password")}
+            />
+            <span className="input-group-text">
+              <i className="fa fa-eye fa-fw" onClick={() => showPassword()}></i>
+            </span>
+
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password.message}</div>
+            )}
+          </div>
+          <div className="input-group mb-1">
+            <span className="input-group-text">
+              <i className="fa fa-file-image-o fa-fw"></i>
+            </span>
+            <input
+              type="file"
+              className={`form-control ${errors.image ? "is-invalid" : ""}`}
+              placeholder="Profile image..."
+              {...register("image")}
+            />
+            {errors.image && (
+              <div className="invalid-feedback">{errors.image.message}</div>
+            )}
+          </div>
+
+          <div className="d-grid mt-3">
+            <button className="btn btn-info" type="submit" disabled={!isValid}>
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

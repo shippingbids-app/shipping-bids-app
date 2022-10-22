@@ -21,6 +21,8 @@ function OfferDetail() {
 
   const service = services.filter((serv) => serv.value === offer?.services[0]);
   const serviceToShow = service[0]?.label;
+  const serviceIcon = service[0]?.icon
+
 
   const navigation = useNavigate();
 
@@ -169,7 +171,7 @@ function OfferDetail() {
             <i className="fa fa-archive me-2"></i> {capacityToShow}
           </h5>
           <h5>
-            <i className="fa fa-building me-2"></i> {serviceToShow}
+            <i className={`fa fa-${serviceIcon} me-2`}></i> {serviceToShow}
           </h5>
         </div>
       </div>
@@ -205,7 +207,7 @@ function OfferDetail() {
                   className="form-control mb-2"
                   placeholder="Add your bid"
                 />
-                <button type="submit" className="btn btn-sm btn-primary">
+                <button type="submit" className="btn btn-sm btn-info">
                   Bid
                 </button>
               </form>
@@ -277,7 +279,7 @@ function OfferDetail() {
                   className="form-control mb-2"
                   placeholder="Add Comment..."
                 />
-                <button type="submit" className="btn btn-sm btn-primary">
+                <button type="submit" className="btn btn-sm btn-info">
                   Comment
                 </button>
               </form>
@@ -309,7 +311,7 @@ function OfferDetail() {
                   <br />
                   <p>{comment.text}</p>
                   <button
-                    className="deleteButton  btn btn-sm text-danger "
+                    className="deleteButton btn btn-sm text-danger "
                     onClick={() => handleDeleteComment(comment)}
                   >
                     <b>X</b>

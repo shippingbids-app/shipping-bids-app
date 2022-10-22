@@ -3,8 +3,8 @@ const { User } = require("../models");
 const mailer = require("../mail/mailer");
 
 module.exports.profile = (req, res, next) => {
-  res.json(req.user)
-}
+  res.json(req.user);
+};
 
 module.exports.register = (req, res, next) => {
   const { email } = req.body;
@@ -18,9 +18,9 @@ module.exports.register = (req, res, next) => {
           })
         );
       } else {
-        req.body.image = req.file.path
+        req.body.image = req.file.path;
         return User.create(req.body).then((user) => {
-          mailer.sendWelcome(user)
+          mailer.sendWelcome(user);
           res.status(201).json(user);
         });
       }
@@ -40,7 +40,7 @@ module.exports.authenticate = (req, res, next) => {
 
   const { email, password } = req.body;
   User.findOne({ email })
-  .populate("services")
+    .populate("services")
     .then((user) => {
       if (!user) {
         invalidAuhtError();
@@ -80,19 +80,17 @@ module.exports.userProfile = (req, res, next) => {
 };
 
 module.exports.userProfileUpdate = (req, res, next) => {
-  debugger
-  const userData = ({ email, phoneNumber, image, password} = req.body)
-  Object.assign(req.user, userData)
+  if (req.file) {
+    req.body.image = req.file.path;
+  }
+
+  const userData = ({ email, phoneNumber, image, password } = req.body);
+  Object.assign(req.user, userData);
 
   req.user
     .save()
     .then((user) => res.json(user))
-    .catch(error => next(error))
-
-
-  // User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-  //   .then((user) => res.json(user))
-  //   .catch(next);
+    .catch((error) => next(error));
 };
 
 module.exports.logout = (req, res, next) => {

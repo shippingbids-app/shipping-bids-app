@@ -38,7 +38,7 @@ function UserDetailScreen() {
         <img src={user?.image} className="card-img-top" alt={user?.username} />
         <div className="card-body">
           <h5 className="card-title">
-            User name: <b>{user?.username}</b>
+            Username: <b>{user?.username}</b>
           </h5>
           <h5 className="card-title">
             Email: <b>{user?.email}</b>
@@ -47,22 +47,19 @@ function UserDetailScreen() {
             Phone number: <b>{user?.phoneNumber}</b>
           </h5>
           <h5 className="card-title">
-            Rating:
-            <b>
-              {user?.rating} <i className="fa fa-star text-warning"></i>
-            </b>
+            Rating: <b>{user?.rating}</b>{" "}
+            <i className="fa fa-star text-warning"></i>
           </h5>
 
           {userLogged?.user?.id === user?.id && (
             <div className=" d-flex justify-content-center">
-            <Link to={`/users/${id}/profile`}>
-              <button className="btn btn-outline-primary btn-sm mx-auto me-3">
-                UPDATE
-              </button>
-            </Link>
-          </div>
+              <Link to={`/users/${id}/profile`}>
+                <button className="btn btn-outline-primary btn-sm mx-auto me-3">
+                  UPDATE
+                </button>
+              </Link>
+            </div>
           )}
-          
         </div>
 
         {offers ? (

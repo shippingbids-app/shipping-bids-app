@@ -18,6 +18,15 @@ function LoginScreen() {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
+  const showPassword = () => {
+    let x = document.getElementById("password");
+    if (x?.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  };
+
   const handleLogin = (data) => {
     authenticate(data)
       .then((data) => {
@@ -61,6 +70,7 @@ function LoginScreen() {
               <i className="fa fa-key fa-fw"></i>
             </span>
             <input
+              id="password"
               type="password"
               className={`form-control ${errors.password ? "is-invalid" : ""}`}
               placeholder="Password..."
@@ -68,6 +78,10 @@ function LoginScreen() {
                 required: "Password is required",
               })}
             />
+            <span className="input-group-text">
+              <i className="fa fa-eye fa-fw" onClick={() => showPassword()}></i>
+            </span>
+
             {errors.password && (
               <div className="invalid-feedback">{errors.password.message}</div>
             )}

@@ -28,21 +28,12 @@ function Map({ center, zoom, markers }) {
         animation: window.google.maps.Animation.DROP,
       });
       const contentString =
-        '<div id="content">' +
-        '<div id="siteNotice">' +
-        "</div>" +
-        `<h1 id="firstHeading" class="firstHeading">${marker.title}</h1>` +
-        '<div id="bodyContent">' +
-        "<br>" +
-        `${marker.destination}` +
-        "<br>" +
-        "<br>" +
-        `${capacityToShow}` +
-        "<br>" +
-        "<br>" +
+        '<div>' +
+        `<h4 class="text-center">${marker.title}</h4>` +
+        `<p><b>Destination:</b><br>${marker.destination}</p>` +
+        `<p><b>Package size:</b><br>${capacityToShow}</p>` +
         `<a href="/offers/${marker.id}">` +
-        "Go to the offer details</a> " +
-        "</div>" +
+        "Go to the offer details</a>" +
         "</div>";
       addInfoWindow(mapMarker, contentString);
     });
