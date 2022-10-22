@@ -166,6 +166,7 @@ function OfferForm() {
               <AutoComplete
                 apiKey={GOOGLE_API_KEY}
                 onPlaceSelected={(place) => {
+                  debugger
                   const destination = {
                     destinationAddress: place.formatted_address,
                     destination: [place.geometry.location.lat(), place.geometry.location.lng()],
