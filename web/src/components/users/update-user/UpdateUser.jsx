@@ -25,6 +25,9 @@ function UpdateUser() {
   };
 
   const handleUpdateProfile = (user) => {
+    if (!user.image.value) {
+      user.image = ""
+    }
     Object.keys(user).forEach((k) => {
       if (user[k] === "") {
         delete user[k];
