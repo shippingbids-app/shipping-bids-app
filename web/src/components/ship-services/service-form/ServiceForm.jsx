@@ -55,10 +55,9 @@ function ServiceForm() {
               <Select
                 className="form-control p-0"
                 value={capacities.find((capacity) => capacity.value === value)}
-                onChange={(capacities) =>
-                  onChange(capacities.map((capacity) => capacity.value))
+                onChange={(capacity) =>
+                  onChange(capacity.value)
                 }
-                isMulti
                 onBlur={onBlur}
                 options={capacities}
                 styles={{
@@ -67,7 +66,7 @@ function ServiceForm() {
                     border: 0,
                   }),
                 }}
-                placeholder="Package capacity"
+                placeholder="Max package capacity"
               />
               {errors.logisticsCapacity && (
                 <div className="invalid-feedback">

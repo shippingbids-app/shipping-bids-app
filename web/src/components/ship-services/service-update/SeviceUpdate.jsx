@@ -18,6 +18,13 @@ function SeviceUpdate() {
   } = useForm({ mode: "all" });
 
   const handleServiceUpdate = (data) => {
+
+    Object.keys(data).forEach((k) => {
+      if (data[k] === "") {
+        delete data[k]
+      }
+    })
+
     serviceUpdate(data, serviceId)
       .then((data) => {
         console.log("service updated");
@@ -48,10 +55,9 @@ function SeviceUpdate() {
               <Select
                 className="form-control p-0"
                 value={capacities.find((capacity) => capacity.value === value)}
-                onChange={(capacities) =>
-                  onChange(capacities.map((capacity) => capacity.value))
+                onChange={(capacity) =>
+                  onChange(capacity.value)
                 }
-                isMulti
                 onBlur={onBlur}
                 options={capacities}
                 styles={{
@@ -60,7 +66,7 @@ function SeviceUpdate() {
                     border: 0,
                   }),
                 }}
-                placeholder="Package capacity"
+                placeholder="Max package capacity"
               />
               {errors.logisticsCapacity && (
                 <div className="invalid-feedback">
@@ -127,7 +133,7 @@ function SeviceUpdate() {
         </div>
 
         <div className="d-grid mt-3">
-          <button className="btn btn-success" type="submit" disabled={!isValid}>
+          <button className="btn btn-success" type="submit">
             Update
           </button>
         </div>
