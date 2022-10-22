@@ -31,10 +31,10 @@ function OfferForm() {
     data = {
       ...data,
       ...data.origin,
-      ...data.destination
-    }
+      ...data.destination,
+    };
 
-    console.log(data)
+    console.log(data);
 
     offerRegister(data)
       .then((data) => {
@@ -143,19 +143,23 @@ function OfferForm() {
               </span>
               <AutoComplete
                 apiKey={GOOGLE_API_KEY}
+                options={{ types: [] }}
                 onPlaceSelected={(place) => {
                   const origin = {
                     originAddress: place.formatted_address,
-                    origin: [place.geometry.location.lat(), place.geometry.location.lng()],
+                    origin: [
+                      place.geometry.location.lat(),
+                      place.geometry.location.lng(),
+                    ],
                   };
-                  onChange(origin)
+                  onChange(origin);
                 }}
                 className="form-control"
               />
             </div>
           )}
         />
-         <Controller
+        <Controller
           name="destination"
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
@@ -165,13 +169,16 @@ function OfferForm() {
               </span>
               <AutoComplete
                 apiKey={GOOGLE_API_KEY}
+                options={{ types: [] }}
                 onPlaceSelected={(place) => {
-                  debugger
                   const destination = {
                     destinationAddress: place.formatted_address,
-                    destination: [place.geometry.location.lat(), place.geometry.location.lng()],
+                    destination: [
+                      place.geometry.location.lat(),
+                      place.geometry.location.lng(),
+                    ],
                   };
-                  onChange(destination)
+                  onChange(destination);
                 }}
                 className="form-control"
               />
