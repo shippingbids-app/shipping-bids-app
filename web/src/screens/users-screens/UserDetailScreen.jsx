@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getUserProfile } from "../../services/offer-user-service";
 import { AuthContext } from "../../contexts/AuthContext";
+import { capacities } from "../../data";
 
 function UserDetailScreen() {
   const [user, setUser] = useState(null);
@@ -13,7 +14,11 @@ function UserDetailScreen() {
   const userLogged = useContext(AuthContext);
 
   const serviceId = user?.services[0]?.id;
-
+  const capacity = capacities.filter(
+    (cap) => cap.value === services?.logisticsCapacity[0]
+  );
+  const capacityToShow = capacity[0]?.label;
+  
   useEffect(() => {
     getUserProfile(id)
       .then((user) => setUser(user))
@@ -38,16 +43,20 @@ function UserDetailScreen() {
         <img src={user?.image} className="card-img-top" alt={user?.username} />
         <div className="card-body">
           <h5 className="card-title">
-            Username: <b>{user?.username}</b>
+            <i className=" fa fa-user-circle-o me-2"></i>
+            <b>{user?.username}</b>
           </h5>
           <h5 className="card-title">
-            Email: <b>{user?.email}</b>
+            <i className=" fa fa-envelope-o me-2"></i>
+            <b>{user?.email}</b>
           </h5>
           <h5 className="card-title">
-            Phone number: <b>{user?.phoneNumber}</b>
+            <i className=" fa fa-phone me-2"></i>
+            <b>{user?.phoneNumber}</b>
           </h5>
           <h5 className="card-title">
-            Rating: <b>{user?.rating}</b>{" "}
+            <i className=" fa fa-signal me-2"></i>
+            <b>{user?.rating}</b>{" "}
             <i className="fa fa-star text-warning"></i>
           </h5>
 
@@ -92,17 +101,17 @@ function UserDetailScreen() {
               Service available on: <b>{services.address}</b>
             </li>
             <h4 className="ms-5 text-primary">Vehicles:</h4>
+            <li className="list-group-item">
             {services.vehicles.map((vehicle) => (
-              <li className="list-group-item" key={vehicle}>
-                <b>{vehicle}</b>
-              </li>
+              
+                <i className={`fa fa-${vehicle} ms-4`} key={vehicle}></i>
+              
             ))}
+            </li>
             <h4 className="ms-5 text-primary">Capacity:</h4>
-            {services.logisticsCapacity.map((capacity) => (
               <li className="list-group-item" key={capacity}>
-                <b>{capacity}</b>
+                <b>{capacityToShow}</b>
               </li>
-            ))}
           </ul>
         ) : (
           <></>
