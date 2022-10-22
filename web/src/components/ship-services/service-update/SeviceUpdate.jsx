@@ -18,6 +18,9 @@ function SeviceUpdate() {
   } = useForm({ mode: "all" });
 
   const handleServiceUpdate = (data) => {
+    if (data.address === undefined) {
+      data.address = ""
+    }
 
     Object.keys(data).forEach((k) => {
       if (data[k] === "") {
@@ -68,11 +71,6 @@ function SeviceUpdate() {
                 }}
                 placeholder="Max package capacity"
               />
-              {errors.logisticsCapacity && (
-                <div className="invalid-feedback">
-                  {errors.logisticsCapacity.message}
-                </div>
-              )}
             </div>
           )}
         />
@@ -102,11 +100,6 @@ function SeviceUpdate() {
                 }}
                 placeholder="Vehicles availables"
               />
-              {errors.vehicles && (
-                <div className="invalid-feedback">
-                  {errors.vehicles.message}
-                </div>
-              )}
             </div>
           )}
         />
@@ -117,19 +110,10 @@ function SeviceUpdate() {
           </span>
           <input
             type="text"
-            className={`form-control g-places-finder ${
-              errors.address ? "is-invalid" : ""
-            }`}
+            className={`form-control g-places-finder`}
             placeholder="Origin address..."
-            {...register("address", {
-              required: "Address is required",
-            })}
+            {...register("address")}
           />
-          {errors.address && (
-            <div className="invalid-feedback">{errors.address.message}</div>
-          )}
-          <input type="hidden" name="lat" value="lat" />
-          <input type="hidden" name="lng" value="lng" />
         </div>
 
         <div className="d-grid mt-3">
