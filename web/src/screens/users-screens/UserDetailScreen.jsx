@@ -28,8 +28,8 @@ function UserDetailScreen() {
   if (!user) {
     return (
       <>
-        <div className="d-flex justify-content-center mt-5 pt-5">
-          <div className="spinner-border" role="status">
+        <div className="text-primary text-center mt-5 pt-5">
+          <div className="spinner-grow mt-5" style={{width: "3rem", height: "3rem"}} role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
@@ -72,8 +72,8 @@ function UserDetailScreen() {
       </div>
 
       {services ? (
-        <div class="card my-3">
-          <div class="card-body">
+        <div className="card my-3">
+          <div className="card-body">
             <div className="d-flex justify-content-between">
               <h3 className="text-primary">Services:</h3>
               <Link to={`/services/${serviceId}`}>
@@ -82,27 +82,27 @@ function UserDetailScreen() {
                 </button>
               </Link>
             </div>
-            <h5 class="card-title">
+            <h5 className="card-title">
               <i className="fa fa-globe text-info fa-fw me-3"></i> Service
               available in:
             </h5>
             <div className="d-flex justify-content-center">
-              <h6 class="card-subtitle mt-2 text-muted ms-3">
+              <h6 className="card-subtitle mt-2 text-muted ms-3">
                 {services.address}
               </h6>
             </div>
             <hr />
-            <h5 class="card-title">
+            <h5 className="card-title">
               <i className="fa fa-cubes text-warning fa-fw me-3"></i> Max
               capacity:
             </h5>
             <div className="d-flex justify-content-center">
-              <h6 class="card-subtitle mt-2 text-muted ms-3">
+              <h6 className="card-subtitle mt-2 text-muted ms-3">
                 {capacityToShow}
               </h6>
             </div>
             <hr />
-            <h5 class="card-title">
+            <h5 className="card-title">
               <i className="fa fa-paper-plane fa-fw me-3"></i> Available
               vehicles:
             </h5>
@@ -123,13 +123,13 @@ function UserDetailScreen() {
       )}
 
       {offers ? (
-        <div class="card my-3">
-          <div class="card-body">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
+        <div className="card my-3">
+          <div className="card-body">
+            <div className="accordion accordion-flush" id="accordionFlushExample">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="flush-headingOne">
                   <button
-                    class="accordion-button collapsed"
+                    className="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseOne"
@@ -141,11 +141,11 @@ function UserDetailScreen() {
                 </h2>
                 <div
                   id="flush-collapseOne"
-                  class="accordion-collapse collapse"
+                  className="accordion-collapse collapse"
                   aria-labelledby="flush-headingOne"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <div class="accordion-body">
+                  <div className="accordion-body">
                     {offers.map((offer) => (
                       <>
                         <ul key={offer.id} className="list-group">

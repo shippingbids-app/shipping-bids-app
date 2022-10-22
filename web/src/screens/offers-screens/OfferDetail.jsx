@@ -112,8 +112,10 @@ function OfferDetail() {
   if (!offer) {
     return (
       <>
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
+        <div className="text-primary text-center mt-5 pt-5">
+          <div className="spinner-grow mt-5" style={{width: "3rem", height: "3rem"}} role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
       </>
     );

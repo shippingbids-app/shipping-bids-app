@@ -4,7 +4,7 @@ import ScrollUp from "../../components/ui/scroll-up/ScrollUp";
 import * as offerService from "../../services/offer-user-service";
 
 function OffersListScreen() {
-  const [offers, setOffers] = useState([]);
+  const [offers, setOffers] = useState(null);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -19,6 +19,18 @@ function OffersListScreen() {
       )
       .catch((error) => console.error(error));
   }, [search]);
+
+  if (!offers) {
+    return (
+      <>
+        <div className="text-primary text-center mt-5 pt-5">
+          <div className="spinner-grow mt-5" style={{width: "3rem", height: "3rem"}} role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <div className="container">
