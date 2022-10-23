@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { userUpdateProfile } from "../../../services/offer-user-service";
@@ -25,7 +25,7 @@ function UpdateUser() {
   };
 
   const handleUpdateProfile = (user) => {
-    if (!user.image.value) {
+    if (user.image[0] === undefined) {
       user.image = ""
     }
     Object.keys(user).forEach((k) => {
