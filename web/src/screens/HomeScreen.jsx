@@ -12,8 +12,17 @@ function HomeScreen() {
 
   if (!user) return <></>;
   return (
-    <>
-      <img src="../assets/landing_page.png" alt="Welcome to Shipping Bids" className="img-fluid mt-2" style={{width: "100%"}}/>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-lg-5">
+          <img
+            src="../assets/landing_page.png"
+            alt="Welcome to Shipping Bids"
+            className="img-fluid mt-2"
+            style={{ width: "100%" }}
+          />
+        </div>
+      </div>
       <div className="d-flex justify-content-around">
         {!user?.user && (
           <>
@@ -31,7 +40,7 @@ function HomeScreen() {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }
 
