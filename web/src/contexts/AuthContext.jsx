@@ -6,24 +6,35 @@ export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(undefined);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
-    offerService
+    const isLoaded = localStorage.getItem("user-loaded") === "true";
+    if (isLoaded) {
+      offerService
       .getProfile()
       .then((user) => setUser(user))
       .catch((user) => setUser(null));
+    } else {
+      setUser(null)
+    }
+    
   }, []);
 
   function logOut() {
-    localStorage.clear()
-    setUser(null)
-    navigate('/')
+    localStorage.clear();
+    setUser(null);
+    navigate("/");
   }
+
+  const authenticateUser = (user) => {
+    localStorage.setItem("user-loaded", "true");
+    setUser(user);
+  };
 
   const value = {
     user,
-    setUser,
-    logOut
+    setUser: authenticateUser,
+    logOut,
   };
 
   if (user === undefined) {

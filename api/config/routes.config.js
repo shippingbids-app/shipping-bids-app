@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const createError = require("http-errors");
 const upload = require("../config/multer.config");
 const { auth, offer, service, comment, bid } = require("../controllers/");
 const {
@@ -80,5 +81,8 @@ router.delete(
   servicesMid.isOwnedByUser,
   service.delete
 );
+
+router.use((req, res, next) => next(createError(404, "Route not found")));
+
 
 module.exports = router;
