@@ -10,14 +10,14 @@ require("./config/cron.config")
 
 const app = express();
 
-app.use((req, res, next) => {
-  res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.set("Access-Control-Allow-Headers", "content-type");
-  res.set("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
-  res.set("Access-Control-Allow-Credentials", "true");
-  res.set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-  next();
-})
+// app.use((req, res, next) => {
+//   res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.set("Access-Control-Allow-Headers", "content-type");
+//   res.set("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
+//   res.set("Access-Control-Allow-Credentials", "true");
+//   res.set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+//   next();
+// })
 
 app.use(express.static(`${__dirname}/react-app`))
 
