@@ -42,8 +42,8 @@ function App() {
           <Route path="/map" element={user.user ? <MapScreen /> : <LoginScreen />} />
         </Routes>
       </div>
-
-      <BottomNavbar />
+      {user?.user && <BottomNavbar />}
+      
     </>
   );
 }

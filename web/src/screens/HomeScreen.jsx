@@ -44,7 +44,7 @@ function HomeScreen() {
         {!user?.user && (
           <>
             <Link to={"/login"} className="text-decoration-none">
-              <div className="m-3">
+              <div className="mt-2">
                 <button className="btn btn-primary btn-lg">Login</button>
               </div>
             </Link>
@@ -70,7 +70,7 @@ function HomeScreen() {
                   })}
                   />
               </div>
-              <div className="d-grid mt-3">
+              <div className="d-grid mt-2">
                 <button
                   className="btn btn-dark btn-lg"
                   type="submit"
@@ -81,7 +81,7 @@ function HomeScreen() {
             </form>
 
             <Link to={"/register"} className="text-decoration-none">
-              <div className="m-3">
+              <div className="mt-2">
                 <button className="btn btn-success btn-lg">Register</button>
               </div>
             </Link>
