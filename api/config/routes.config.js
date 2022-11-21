@@ -20,6 +20,7 @@ router.patch(
   "/users/:id/profile",
   secure.isAuthenticated,
   secure.profileIsOwnedByUser,
+  secure.guest,
   upload.single("image"),
   auth.userProfileUpdate
 );

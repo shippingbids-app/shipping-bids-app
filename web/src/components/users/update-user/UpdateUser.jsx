@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
 import { userUpdateProfile } from "../../../services/offer-user-service";
 
 function UpdateUser() {
   const navigation = useNavigate();
   const { id } = useParams();
+  const user = useContext(AuthContext)
+  const username = user.user.username
 
   const {
     register,
@@ -119,12 +123,22 @@ function UpdateUser() {
               <div className="invalid-feedback">{errors.image.message}</div>
             )}
           </div>
-
-          <div className="d-grid mt-3">
-            <button className="btn btn-info" type="submit" disabled={!isValid}>
-              Update
-            </button>
-          </div>
+          {username !== "Guest" ? (
+            <div className="d-grid mt-3">
+              <button className="btn btn-info" type="submit" disabled={!isValid}>
+                Update
+              </button>
+            </div>) : (
+              <div className="d-flex flex-column align-items-center mt-3 gap-3 text-danger">
+                <h3>Can't update data as Guest</h3>
+                <Link to={`/users/${user?.user?.id}`}>
+                  <button className="btn btn-outline-primary btn-sm mx-auto me-3">
+                    Go Back
+                  </button>
+                </Link>
+              </div>
+            )
+          }
         </form>
       </div>
     </>

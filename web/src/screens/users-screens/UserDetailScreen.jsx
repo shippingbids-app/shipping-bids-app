@@ -160,20 +160,22 @@ function UserDetailScreen() {
                       data-bs-parent="#accordionFlushExample"
                     >
                       <div className="accordion-body">
-                        {offers.map((offer) => (
-                          <>
-                            <ul key={offer.id} className="list-group">
-                              <Link
-                                to={`/offers/${offer.id}`}
-                                className=" text-dark"
+                        <ul className="list-group">
+                          {offers.map((offer) => (
+                            <Link
+                              to={`/offers/${offer.id}`}
+                              className=" text-dark"
+                              key={offer?.id}
+                            >
+                              <li
+                                className="list-group-item text-center mb-1 rounded"
+                                
                               >
-                                <li className="list-group-item text-center mb-1 rounded">
-                                  <h3>{offer.title}</h3>
-                                </li>
-                              </Link>
-                            </ul>
-                          </>
-                        ))}
+                                <h3>{offer.title}</h3>
+                              </li>
+                            </Link>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   </div>

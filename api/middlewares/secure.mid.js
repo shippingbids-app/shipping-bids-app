@@ -15,3 +15,11 @@ module.exports.profileIsOwnedByUser = (req, res, next) => {
     next(createError(401))
   }
 }
+
+module.exports.guest = (req, res, next) => {
+  if (req.user.username !== "Guest") {
+    next()
+  } else {
+    next(createError(401))
+  }
+}
