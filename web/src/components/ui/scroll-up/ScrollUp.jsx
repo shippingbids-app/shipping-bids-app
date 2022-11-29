@@ -1,8 +1,12 @@
 import "./ScrollUp.css"
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function ScrollUp() {
+  const [button, setButton] = useState(null)
+  useEffect(() => {    
   let mybutton = document.getElementById("btn-back-to-top");
+  setButton(mybutton)
+  }, [])
 
   window.onscroll = function () {
     scrollFunction();
@@ -13,9 +17,9 @@ function ScrollUp() {
       document.body.scrollTop > 20 ||
       document.documentElement.scrollTop > 20
     ) {
-      mybutton.style.display = "block";
+      button.style.display = "block";
     } else {
-      mybutton.style.display = "none";
+      button.style.display = "none";
     }
   }
 
