@@ -52,9 +52,11 @@ function OffersListScreen() {
           <i className="fa fa-search"></i>
         </span>
       </div>
+      <div className="d-flex flex-wrap gap-3 justify-content-center">
       {offers?.map((offer) => (
         <OfferCard {...offer} key={offer.id} />
       ))}
+      </div>
     </div>
   );
 }

@@ -25,7 +25,7 @@ function OfferCard({
   const serviceIcon = service[0]?.icon
 
   return (
-    <div className="card text-center my-2">
+    <div className="card text-center my-2 col-md-5 col-xl-3 gap-2">
       <div className="card-header bg-info bg-gradient">
       <i className={`fa fa-${serviceIcon}`}></i> {serviceToShow}</div>
       <div className="card-body">

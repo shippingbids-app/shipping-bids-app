@@ -132,7 +132,7 @@ function UpdateUser() {
               <div className="d-flex flex-column align-items-center mt-3 gap-3 text-danger">
                 <h3>Can't update data as Guest</h3>
                 <Link to={`/users/${user?.user?.id}`}>
-                  <button className="btn btn-outline-primary btn-sm mx-auto me-3">
+                  <button className="btn btn-outline-dark btn-sm mx-auto me-3">
                     Go Back
                   </button>
                 </Link>
