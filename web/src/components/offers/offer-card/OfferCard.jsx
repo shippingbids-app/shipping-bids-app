@@ -25,15 +25,15 @@ function OfferCard({
   const serviceIcon = service[0]?.icon
 
   return (
-    <div className="card text-center my-2 col-md-5 col-xl-3 gap-2">
-      <div className="card-header bg-info bg-gradient">
+    <div className="card text-center my-2 col-md-5 col-xl-3 gap-2 border-0 shadow">
+      <div className="card-header bg-gradient">
       <i className={`fa fa-${serviceIcon}`}></i> {serviceToShow}</div>
       <div className="card-body">
         <h3 className="card-title">{title}</h3>
         <p className="card-text">
           <u>{capacityToShow}</u> from <b>{originAddress}</b> to{" "}
           <b>{destinationAddress}</b>        </p>
-        <Link to={`/offers/${offerId}`} className="btn btn-primary">
+        <Link to={`/offers/${offerId}`} className="btn btn-primary shadow">
           Go bid!
         </Link>
       </div>

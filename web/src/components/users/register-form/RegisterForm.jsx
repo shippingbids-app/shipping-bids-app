@@ -45,7 +45,7 @@ function RegisterForm() {
     <div>
       <form onSubmit={handleSubmit(handleRegister)}>
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-user fa-fw"></i>
           </span>
           <input
@@ -61,7 +61,7 @@ function RegisterForm() {
           )}
         </div>
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-envelope-o fa-fw"></i>
           </span>
           <input
@@ -77,7 +77,7 @@ function RegisterForm() {
           )}
         </div>
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-lock fa-fw"></i>
           </span>
           <input
@@ -89,7 +89,7 @@ function RegisterForm() {
               required: "Password is required",
             })}
           />
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-eye fa-fw" onClick={() => showPassword()}></i>
           </span>
           {errors.password && (
@@ -97,7 +97,7 @@ function RegisterForm() {
           )}
         </div>
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-phone fa-fw"></i>
           </span>
           <input
@@ -113,7 +113,7 @@ function RegisterForm() {
           )}
         </div>
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-file-image-o fa-fw"></i>
           </span>
           <input
@@ -127,14 +127,14 @@ function RegisterForm() {
           )}
         </div>
         <div className="d-grid mt-3">
-          <button className="btn btn-success" type="submit" disabled={!isValid}>
+          <button className="btn btn-success shadow" type="submit" disabled={!isValid}>
             Register
           </button>
         </div>
         <hr className="dropdown-divider mb-4"></hr>
         <Link to={"/login"} className="text-decoration-none">
           <div className="d-grid mt-2">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary shadow">Login</button>
           </div>
         </Link>
       </form>

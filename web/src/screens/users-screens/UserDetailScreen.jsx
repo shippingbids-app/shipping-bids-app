@@ -45,7 +45,7 @@ function UserDetailScreen() {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-lg-5 mt-2">
-          <div className="card">
+          <div className="card shadow">
             <img
               src={user?.image}
               className="card-img-top"
@@ -83,7 +83,7 @@ function UserDetailScreen() {
           </div>
 
           {services ? (
-            <div className="card my-3">
+            <div className="card my-3 shadow">
               <div className="card-body">
                 <div className="d-flex justify-content-between">
                   <h3 className="text-primary">Services:</h3>
@@ -134,7 +134,7 @@ function UserDetailScreen() {
           )}
 
           {offers ? (
-            <div className="card my-3">
+            <div className="card my-3 shadow">
               <div className="card-body">
                 <div
                   className="accordion accordion-flush"

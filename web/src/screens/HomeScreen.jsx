@@ -45,7 +45,7 @@ function HomeScreen() {
           <>
             <Link to={"/login"} className="text-decoration-none">
               <div className="mt-2">
-                <button className="btn btn-primary btn-lg">Login</button>
+                <button className="btn btn-primary btn-lg shadow">Login</button>
               </div>
             </Link>
 
@@ -72,7 +72,7 @@ function HomeScreen() {
               </div>
               <div className="d-grid mt-2">
                 <button
-                  className="btn btn-dark btn-lg"
+                  className="btn btn-dark btn-lg shadow"
                   type="submit"
                 >
                 Guest
@@ -82,7 +82,7 @@ function HomeScreen() {
 
             <Link to={"/register"} className="text-decoration-none">
               <div className="mt-2">
-                <button className="btn btn-success btn-lg">Register</button>
+                <button className="btn btn-success btn-lg shadow">Register</button>
               </div>
             </Link>
           </>
@@ -93,7 +93,7 @@ function HomeScreen() {
           <img
             src="../assets/landing_page.png"
             alt="Welcome to Shipping Bids"
-            className="img-fluid mt-2"
+            className="img-fluid mt-2 rounded shadow"
             style={{ width: "100%" }}
           />
         </div>

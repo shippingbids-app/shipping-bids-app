@@ -49,7 +49,7 @@ function ServiceForm() {
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
-              <span className="input-group-text">
+              <span className="input-group-text border-0">
                 <i className="fa fa-archive fa-fw"></i>
               </span>
               <Select
@@ -82,7 +82,7 @@ function ServiceForm() {
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
-              <span className="input-group-text">
+              <span className="input-group-text border-0">
                 <i className="fa fa-car fa-fw"></i>
               </span>
               <Select
@@ -112,7 +112,7 @@ function ServiceForm() {
         />
 
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-globe fa-fw"></i>
           </span>
           <input
@@ -133,7 +133,7 @@ function ServiceForm() {
         </div>
 
         <div className="d-grid mt-3">
-          <button className="btn btn-danger" type="submit" disabled={!isValid}>
+          <button className="btn btn-danger shadow" type="submit" disabled={!isValid}>
             Register
           </button>
         </div>

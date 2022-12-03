@@ -56,7 +56,7 @@ function OfferForm() {
     <>
       <form onSubmit={handleSubmit(handleOfferRegister)}>
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-sticky-note fa-fw"></i>
           </span>
           <input
@@ -76,7 +76,7 @@ function OfferForm() {
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
-              <span className="input-group-text">
+              <span className="input-group-text border-0">
                 <i className="fa fa-archive fa-fw"></i>
               </span>
               <Select
@@ -107,7 +107,7 @@ function OfferForm() {
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
-              <span className="input-group-text">
+              <span className="input-group-text border-0">
                 <i className="fa fa-building fa-fw"></i>
               </span>
               <Select
@@ -138,7 +138,7 @@ function OfferForm() {
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
-              <span className="input-group-text">
+              <span className="input-group-text border-0">
                 <i className="fa fa-location-arrow fa-fw"></i>
               </span>
               <AutoComplete
@@ -164,7 +164,7 @@ function OfferForm() {
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <div className="input-group mb-1">
-              <span className="input-group-text">
+              <span className="input-group-text border-0">
                 <i className="fa fa-map-marker fa-fw"></i>
               </span>
               <AutoComplete
@@ -186,7 +186,7 @@ function OfferForm() {
           )}
         />
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-calendar fa-fw"></i>
           </span>
           <input
@@ -202,7 +202,7 @@ function OfferForm() {
           )}
         </div>
         <div className="input-group mb-1">
-          <span className="input-group-text">
+          <span className="input-group-text border-0">
             <i className="fa fa-eur fa-fw"></i>
           </span>
           <input
@@ -219,7 +219,7 @@ function OfferForm() {
         </div>
 
         <div className="d-grid mt-3">
-          <button className="btn btn-danger" type="submit" disabled={!isValid}>
+          <button className="btn btn-danger shadow" type="submit" disabled={!isValid}>
             Register
           </button>
         </div>

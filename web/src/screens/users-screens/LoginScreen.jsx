@@ -49,7 +49,7 @@ function LoginScreen() {
       <Section title="Login" icon="sign-in">
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="input-group mb-1">
-            <span className="input-group-text">
+            <span className="input-group-text border-0">
               <i className="fa fa-user fa-fw"></i>
             </span>
             <input
@@ -66,7 +66,7 @@ function LoginScreen() {
           </div>
 
           <div className="input-group mb-1">
-            <span className="input-group-text">
+            <span className="input-group-text border-0">
               <i className="fa fa-key fa-fw"></i>
             </span>
             <input
@@ -78,7 +78,7 @@ function LoginScreen() {
                 required: "Password is required",
               })}
             />
-            <span className="input-group-text">
+            <span className="input-group-text border-0">
               <i className="fa fa-eye fa-fw" onClick={() => showPassword()}></i>
             </span>
 
@@ -89,7 +89,7 @@ function LoginScreen() {
 
           <div className="d-grid mt-3">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary shadow"
               type="submit"
               disabled={!isValid}
             >
@@ -99,7 +99,7 @@ function LoginScreen() {
           <hr className="dropdown-divider mb-4"></hr>
           <Link to={"/register"} className="text-decoration-none">
             <div className="d-grid mt-2">
-              <button className="btn btn-success">Register</button>
+              <button className="btn btn-success shadow">Register</button>
             </div>
           </Link>
         </form>

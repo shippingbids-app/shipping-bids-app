@@ -4,3 +4,7 @@ body{
 .input-group-text{
     background-color: #98BDF4;
 }
+
+.card-header {
+    background-color: #98BDF4;
+}

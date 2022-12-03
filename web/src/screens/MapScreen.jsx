@@ -11,7 +11,7 @@ function MapScreen() {
       .catch(error => console.error(error))
   }, [])
   return (
-    <div className="mt-3">
+    <div className="mt-3 shadow rounded">
       <OfferMap offers={offers}/>
     </div>
   );

@@ -123,7 +123,7 @@ function OfferDetail() {
 
   return (
     <div>
-      <div className="card mt-3">
+      <div className="card mt-3 shadow">
         <div className="card-body">
           <button
             className="deleteButton btn btn-sm text-danger "
@@ -179,7 +179,7 @@ function OfferDetail() {
       </div>
 
       <div
-        className="accordion accordion-flush mt-5"
+        className="accordion accordion-flush mt-5 shadow"
         id="accordionFlushExample"
       >
         <div className="accordion-item">
